@@ -60,8 +60,6 @@ t_LEFT_PARENTHESIS   = r'\('
 t_RIGHT_PARENTHESIS  = r'\)'
 
 # Inputs and outputs
-t_READ               = r'Console.ReadLine'
-t_WRITE              = r'Console.WriteLine'
 t_STRING             = r'\".*?\"'
 
 ''' Function to identify an ID for a variable '''
