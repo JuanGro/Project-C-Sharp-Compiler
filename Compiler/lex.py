@@ -3,7 +3,7 @@ import sys
 if ".." not in sys.path: sys.path.insert(0,"..")
 import ply.lex as lex
 
-''' KEYWORDS '''
+''' KEYWORDS that you can't use '''
 keywords = {
    'if' : 'IF',
    'else' : 'ELSE',
@@ -16,36 +16,18 @@ keywords = {
    'Console.WriteLine' : 'WRITE',
 }
 
+''' TOKENS to identify in the program '''
 tokens = list(keywords.values()) + [
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIVIDE',
-    'POWER',
-
-    'EQUALS',
-    'NOT_EQUALS',
-    'LESS_EQUAL_THAN',
-    'GREATER_EQUAL_THAN',
-    'LESS_THAN',
-    'GREATER_THAN',
-    'AND',
-    'OR',
-    'NOT',
-
-    'ASSIGN',
-    'SEMICOLON',
-    'QUOTATION_MARK',
-
-    'LEFT_BRACKET',
-    'RIGHT_BRACKET',
-    'LEFT_PARENTHESIS',
-    'RIGHT_PARENTHESIS',
-
-    'ID',
-    'DIGIT',
-    'STRING'
-]
+    # Math operators
+    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'POWER',
+    # Logic operators
+    'EQUALS', 'NOT_EQUALS', 'LESS_EQUAL_THAN', 'GREATER_EQUAL_THAN', 'LESS_THAN', 'GREATER_THAN', 'AND', 'OR', 'NOT',
+    # Others
+    'ASSIGN', 'SEMICOLON', 'QUOTATION_MARK',
+    # Symbols
+    'LEFT_BRACKET', 'RIGHT_BRACKET', 'LEFT_PARENTHESIS', 'RIGHT_PARENTHESIS',
+    # Inputs and outputs
+    'ID', 'DIGIT', 'STRING']
 
 # Math operators
 t_PLUS               = r'\+'
@@ -97,8 +79,10 @@ def t_DIGIT(t):
         t.value = 0
     return t
 
+''' Function to ignore comments '''
 def t_comment(t):
     r'(/\*(.|\n)*?\*/)|(//.*)'
+    print("Comment present")
 
 ''' Ignore the tabs and spaces '''
 t_ignore = " \t"
@@ -118,12 +102,98 @@ lexer = lex.lex()
 
 # Test it out
 test1 = '''
+// int number1 = 5;
+'''
+test2 = '''
 /*
 bool flag;
 */
-// Console.WriteLine(number1);
+'''
+test3 = '''
+int number2 = 6;
+'''
+test4 = '''
+bool FLAG = true;
+'''
+test5 = '''
+Console.WriteLine("Hello World!");
+'''
+test6 = '''
+int number3 = 7;
+bool flag2 = false;
+'''
+test7 = '''
+while(number1 <= 50) {
+    number1 = number1 + 1;
+    if(number1 == 35) {
+        flag = true;
+    } else {
+        flag = false;
+    }
+}
+'''
+test8 = '''
+Console.ReadLine();
+Console.WriteLine("Hello World!");
+'''
+test9 = '''
+bool flag = false;
+int number1 = 3 + 4 * 5;
+
+if(number1 == 35) {
+    // flag = true;
+    number1 = Console.ReadLine();
+} else {
+    flag = false;
+}
+
+/*
+while(number1 <= 50) {
+    number1 = number1 + 1;
+}
+*/
+
+Console.WriteLine("Result");
+Console.WriteLine(number1);
+'''
+test10 = '''
+flag = false;
+bool flag;
+'''
+test11 = '''
+"Hello World";
+Console.WriteLine(int number1);
+Console.WriteLine(int NUMBER2);
+'''
+test12 = '''
+int number3 = 0;
+while true {
+    number3 = number3 + 1;
+}
 '''
 
-# Give the lexer some input
-#lexer.input(test1)
-lex.runmain(data=test1)
+# Check tests
+print("\nTest 1")
+lex.runmain(data = test1)
+print("\nTest 2")
+lex.runmain(data = test2)
+print("\nTest 3")
+lex.runmain(data = test3)
+print("\nTest 4")
+lex.runmain(data = test4)
+print("\nTest 5")
+lex.runmain(data = test5)
+print("\nTest 6")
+lex.runmain(data = test6)
+print("\nTest 7")
+lex.runmain(data = test7)
+print("\nTest 8")
+lex.runmain(data = test8)
+print("\nTest 9")
+lex.runmain(data = test9)
+print("\nTest 10")
+lex.runmain(data = test10)
+print("\nTest 11")
+lex.runmain(data = test11)
+print("\nTest 12")
+lex.runmain(data = test12)
