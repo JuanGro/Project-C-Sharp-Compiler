@@ -8,8 +8,9 @@ keywords = {
    'if' : 'IF',
    'else' : 'ELSE',
    'while' : 'WHILE',
-   'int' : 'INTEGER',
-   'bool' : 'BOOLEAN',
+   'int' : 'INTEGER_TYPE',
+   'bool' : 'BOOLEAN_TYPE',
+   'string' : 'STRING_TYPE',
    'false' : 'FALSE',
    'true' : 'TRUE',
    'Console.ReadLine': 'READ',
@@ -121,6 +122,7 @@ Console.WriteLine("Hello World!");
 test6 = '''
 int number3 = 7;
 bool flag2 = false;
+string name1 = "Juan";
 '''
 test7 = '''
 while(number1 <= 50) {
@@ -139,6 +141,7 @@ Console.WriteLine("Hello World!");
 test9 = '''
 bool flag = false;
 int number1 = 3 + 4 * 5;
+name2 = "Carlos";
 
 if(number1 == 35) {
     // flag = true;
