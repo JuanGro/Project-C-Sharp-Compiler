@@ -47,8 +47,6 @@ tokens = list(keywords.values()) + [
     'STRING'
 ]
 
-states = (('comment', 'exclusive'),)
-
 # Math operators
 t_PLUS               = r'\+'
 t_MINUS              = r'-'
@@ -99,20 +97,8 @@ def t_DIGIT(t):
         t.value = 0
     return t
 
-def t_SINGLE_COMMENT(t):
-    r'//.*'
-    pass
-    # No return value. Token discarded
-
 def t_comment(t):
-    r'/\*'
-    t.lexer.begin('comment')
-    #print(t.value)
-
-def t_comment_body_part(t):
-    r'(.|\n)*\*/'
-    t.lexer.begin('INITIAL')
-    #print(t)
+    r'(/\*(.|\n)*?\*/)|(//.*)'
 
 ''' Ignore the tabs and spaces '''
 t_ignore = " \t"
@@ -127,15 +113,14 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-t_comment_error = t_error
-t_comment_ignore = t_ignore
-
 # Build the lexer
 lexer = lex.lex()
 
 # Test it out
 test1 = '''
+/*
 bool flag;
+*/
 // Console.WriteLine(number1);
 '''
 
