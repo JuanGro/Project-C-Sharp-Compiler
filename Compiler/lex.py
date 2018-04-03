@@ -174,7 +174,7 @@ while true {
 '''
 
 # Check tests
-print("\nTest 1")
+print("\nTest 1:")
 lex.runmain(data = test1)
 print("\nTest 2")
 lex.runmain(data = test2)

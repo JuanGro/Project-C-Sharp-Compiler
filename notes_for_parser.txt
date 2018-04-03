@@ -1,2 +1,0 @@
-romper el código cuando encuentre un error
-Si encuentra comentarios no mostrar nada, ni un print
