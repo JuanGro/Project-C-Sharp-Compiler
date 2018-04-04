@@ -186,6 +186,7 @@ def p_primary_expression(t):
     primary_expression :  variable_expression
                        |  DIGIT
                        |  STRING_SENTENCE
+                       |  boolean_expression
     '''
     pass
 
@@ -195,6 +196,12 @@ def p_variable_expression(t):
                         | CONSTANT
     '''
     pass
+
+def p_boolean_expression(t):
+    '''
+    boolean_expression : TRUE
+                       | FALSE
+    '''
 
 def p_empty(t):
     'empty : '

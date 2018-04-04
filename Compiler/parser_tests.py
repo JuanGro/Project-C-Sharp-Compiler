@@ -28,6 +28,9 @@ while(number1 <= 50) {
     number1 = number1 + 1;
     if(number1 == 35) {
         flag = true;
+        if (number1 == 35) {
+            flag = true;
+        }
     } else {
         flag = false;
     }
@@ -39,12 +42,12 @@ console.writeline("Hello World!");
 '''
 test9 = '''
 bool flag = false;
-int number1 = 3 + 4 * 5;
+// int number1 = 3 + 4 * 5;
 name2 = "Carlos";
 
 if(number1 == 35) {
     // flag = true;
-    number1 = console.readline();
+    number1 = "hi";
 } else {
     flag = false;
 }
@@ -64,7 +67,7 @@ flag = false;
 bool flag;
 '''
 test11 = '''
-// "Hello World";
+"Hello World" = 2;
 console.writeline(int number1);
 console.writeline(int number_Aux2);
 '''
@@ -73,6 +76,13 @@ int number3 = 0;
 
 while true {
     number3 = number3 + 1;
+}
+'''
+test13 = '''
+0 = number2;
+
+if (CONSTANT > 2) {
+    console.writeline("YES");
 }
 '''
 
@@ -113,3 +123,6 @@ yacc.parse(test11)
 print("\nTest 12:")
 # print("\nTest 12:", test12)
 yacc.parse(test12)
+print("\nTest 13:")
+# print("\nTest 13:", test13)
+yacc.parse(test13)

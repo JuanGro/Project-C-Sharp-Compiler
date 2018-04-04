@@ -6,7 +6,7 @@ import ply.lex as lex
 ''' KEYWORDS that you can't use '''
 reserved = (
    'IF', 'ELSE', 'DO', 'WHILE', 'INT', 'BOOL', 'STRING',
-   'CONSOLE', 'WRITELINE', 'READLINE'
+   'CONSOLE', 'WRITELINE', 'READLINE', 'TRUE', 'FALSE'
 )
 
 ''' TOKENS to identify in the program '''
