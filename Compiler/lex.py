@@ -11,7 +11,7 @@ reserved = (
 ''' TOKENS to identify in the program '''
 tokens = reserved + (
     # Literals
-    'ID',
+    'ID', 'CONSTANT',
     # Math operators
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     # Logic operators
@@ -84,6 +84,11 @@ for r in reserved:
 def t_ID(t):
     r'[a-z_][\w_]*'
     t.type = reserved_map.get(t.value, "ID")
+    return t
+
+def t_CONSTANT(t):
+    r'[A-Z_][\w_]*'
+    t.type = reserved_map.get(t.value, "CONSTANT")
     return t
 
 ''' Function to identify a number '''

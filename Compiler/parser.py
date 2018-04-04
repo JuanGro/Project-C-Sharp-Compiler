@@ -193,6 +193,7 @@ def p_primary_expression(t):
 def p_variable_expression(t):
     '''
     variable_expression : ID
+                        | CONSTANT
     '''
     pass
 
