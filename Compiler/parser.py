@@ -7,6 +7,10 @@ tokens = lex.tokens
 
 # statement-list
 def p_statement_list_1(t):
+    'statement_list : empty'
+    pass
+
+def p_statement_list_2(t):
     'statement_list : statement'
     pass
 
@@ -197,18 +201,18 @@ def p_empty(t):
     pass
 
 def p_error(t):
-    print("Error")
+    print("Error", t)
 
 import profile
 # Build the grammar
 
 yacc.yacc()
 
-while 1:
-    try:
-        s = input('calc > ')
-    except EOFError:
-        break
-    if not s:
-        continue
-    yacc.parse(s)
+# while 1:
+#     try:
+#         s = input('calc > ')
+#     except EOFError:
+#         break
+#     if not s:
+#         continue
+#     yacc.parse(s)
