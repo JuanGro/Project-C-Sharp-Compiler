@@ -17,7 +17,7 @@ Rule 11    declaration_expression -> type_specifier declaration_expression
 Rule 12    selection_statement -> IF conditional_expression block_statement_list
 Rule 13    selection_statement -> selection_statement ELSE block_statement_list
 Rule 14    iteration_statement -> WHILE conditional_expression block_statement_list
-Rule 15    iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI
+Rule 15    iteration_statement -> DO block_statement_list WHILE conditional_expression
 Rule 16    block_statement_list -> LBRACE statement_list RBRACE
 Rule 17    conditional_expression -> LPAREN logical_expression RPAREN
 Rule 18    assignment_expression -> variable_expression
@@ -88,7 +88,7 @@ PLUS                 : 42
 RBRACE               : 16
 READLINE             : 29
 RPAREN               : 17 29
-SEMI                 : 6 7 8 9 15
+SEMI                 : 6 7 8 9
 STRING               : 33
 STRING_SENTENCE      : 48
 TIMES                : 44
@@ -162,7 +162,7 @@ state 1
     (12) selection_statement -> . IF conditional_expression block_statement_list
     (13) selection_statement -> . selection_statement ELSE block_statement_list
     (14) iteration_statement -> . WHILE conditional_expression block_statement_list
-    (15) iteration_statement -> . DO block_statement_list WHILE conditional_expression SEMI
+    (15) iteration_statement -> . DO block_statement_list WHILE conditional_expression
     (10) declaration_expression -> . assignment_expression
     (11) declaration_expression -> . type_specifier declaration_expression
     (54) empty -> .
@@ -340,7 +340,7 @@ state 12
 
 state 13
 
-    (15) iteration_statement -> DO . block_statement_list WHILE conditional_expression SEMI
+    (15) iteration_statement -> DO . block_statement_list WHILE conditional_expression
     (16) block_statement_list -> . LBRACE statement_list RBRACE
 
     LBRACE          shift and go to state 32
@@ -609,7 +609,7 @@ state 30
 
 state 31
 
-    (15) iteration_statement -> DO block_statement_list . WHILE conditional_expression SEMI
+    (15) iteration_statement -> DO block_statement_list . WHILE conditional_expression
 
     WHILE           shift and go to state 50
 
@@ -976,7 +976,7 @@ state 49
 
 state 50
 
-    (15) iteration_statement -> DO block_statement_list WHILE . conditional_expression SEMI
+    (15) iteration_statement -> DO block_statement_list WHILE . conditional_expression
     (17) conditional_expression -> . LPAREN logical_expression RPAREN
 
     LPAREN          shift and go to state 29
@@ -997,7 +997,7 @@ state 51
     (12) selection_statement -> . IF conditional_expression block_statement_list
     (13) selection_statement -> . selection_statement ELSE block_statement_list
     (14) iteration_statement -> . WHILE conditional_expression block_statement_list
-    (15) iteration_statement -> . DO block_statement_list WHILE conditional_expression SEMI
+    (15) iteration_statement -> . DO block_statement_list WHILE conditional_expression
     (10) declaration_expression -> . assignment_expression
     (11) declaration_expression -> . type_specifier declaration_expression
     (54) empty -> .
@@ -1086,7 +1086,18 @@ state 57
     (17) conditional_expression -> LPAREN logical_expression RPAREN .
 
     LBRACE          reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    IF              reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    WHILE           reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    DO              reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    CONSOLE         reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    INT             reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    BOOL            reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    STRING          reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    ID              reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    CONSTANT        reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    $end            reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
     SEMI            reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
+    RBRACE          reduce using rule 17 (conditional_expression -> LPAREN logical_expression RPAREN .)
 
 
 state 58
@@ -1345,9 +1356,20 @@ state 73
 
 state 74
 
-    (15) iteration_statement -> DO block_statement_list WHILE conditional_expression . SEMI
+    (15) iteration_statement -> DO block_statement_list WHILE conditional_expression .
 
-    SEMI            shift and go to state 83
+    IF              reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    WHILE           reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    DO              reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    CONSOLE         reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    INT             reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    BOOL            reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    STRING          reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    ID              reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    CONSTANT        reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    $end            reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    SEMI            reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
+    RBRACE          reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
 
 
 state 75
@@ -1380,7 +1402,7 @@ state 77
 
     (29) input_expression -> CONSOLE DOT READLINE LPAREN . RPAREN
 
-    RPAREN          shift and go to state 84
+    RPAREN          shift and go to state 83
 
 
 state 78
@@ -1479,24 +1501,6 @@ state 82
 
 
 state 83
-
-    (15) iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .
-
-    IF              reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    WHILE           reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    DO              reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    CONSOLE         reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    INT             reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    BOOL            reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    STRING          reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    ID              reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    CONSTANT        reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    $end            reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    SEMI            reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-    RBRACE          reduce using rule 15 (iteration_statement -> DO block_statement_list WHILE conditional_expression SEMI .)
-
-
-state 84
 
     (29) input_expression -> CONSOLE DOT READLINE LPAREN RPAREN .
 

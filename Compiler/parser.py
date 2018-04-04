@@ -68,7 +68,7 @@ def p_iteration_statement_1(t):
     pass
 
 def p_iteration_statement_2(t):
-    'iteration_statement : DO block_statement_list WHILE conditional_expression SEMI'
+    'iteration_statement : DO block_statement_list WHILE conditional_expression'
     pass
 
 # block-statement-list

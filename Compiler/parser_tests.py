@@ -65,6 +65,8 @@ console.writeline(number1);
 test10 = '''
 flag = false;
 bool flag;
+int a;
+;
 '''
 test11 = '''
 "Hello World" = 2;
