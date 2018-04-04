@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'IF ELSE DO WHILE INT BOOL STRING ID PLUS MINUS TIMES DIVIDE LOR LAND LT LE GT GE EQ NE EQUALS LPAREN RPAREN LBRACE RBRACE SEMI DIGIT\n    statement : expression_statement\n              | selection_statement\n              | iteration_statement\n    \n    type_specifier : INT\n                      | BOOL\n                      | STRING\n    expression_statement : declaration_expression SEMIdeclaration_expression : assignment_expressiondeclaration_expression : type_specifier declaration_expressionselection_statement : IF LPAREN logical_expression RPAREN LBRACE statement RBRACEselection_statement : selection_statement ELSE LBRACE statement RBRACEiteration_statement : WHILE LPAREN logical_expression RPAREN statementiteration_statement : DO statement WHILE LPAREN logical_expression RPAREN SEMIassignment_expression : additive_expressionassignment_expression : assignment_expression assignment_operators additive_expressionlogical_expression : equality_expressionlogical_expression : logical_expression logical_operators equality_expressionequality_expression : relational_expressionequality_expression : equality_expression equality_operators relational_expressionrelational_expression : additive_expressionrelational_expression : relational_expression relational_operators additive_expressionadditive_expression : multiplicative_expressionadditive_expression : additive_expression additive_operators multiplicative_expressionmultiplicative_expression : primary_expressionmultiplicative_expression : multiplicative_expression multiplicative_operators primary_expression\n    assignment_operators : EQUALS\n    \n    logical_operators : LAND\n                      | LOR\n    \n    equality_operators : EQ\n                       | NE\n    \n    relational_operators : LT\n                         | GT\n                         | LE\n                         | GE\n    \n    additive_operators : PLUS\n                       | MINUS\n    \n    multiplicative_operators : TIMES\n                             | DIVIDE\n    \n    primary_expression :  ID\n                       |  DIGIT\n    '
+_lr_signature = 'IF ELSE DO WHILE INT BOOL STRING ID PLUS MINUS TIMES DIVIDE LOR LAND LT LE GT GE EQ NE EQUALS LPAREN RPAREN LBRACE RBRACE SEMI DIGITblock_statement_list : LBRACE statement_list RBRACEstatement_list : statementstatement_list : statement_list statement\n    statement : expression_statement\n              | selection_statement\n              | iteration_statement\n    expression_statement : declaration_expression SEMIdeclaration_expression : assignment_expressiondeclaration_expression : type_specifier declaration_expressionselection_statement : IF conditional_statement block_statement_listselection_statement : selection_statement ELSE block_statement_listiteration_statement : WHILE conditional_statement block_statement_listiteration_statement : DO block_statement_list WHILE conditional_statement SEMIconditional_statement : LPAREN logical_expression RPARENassignment_expression : additive_expressionassignment_expression : assignment_expression EQUALS additive_expressionlogical_expression : equality_expressionlogical_expression : logical_expression logical_operators equality_expressionequality_expression : relational_expressionequality_expression : equality_expression equality_operators relational_expressionrelational_expression : additive_expressionrelational_expression : relational_expression relational_operators additive_expressionadditive_expression : multiplicative_expressionadditive_expression : additive_expression additive_operators multiplicative_expressionmultiplicative_expression : primary_expressionmultiplicative_expression : multiplicative_expression multiplicative_operators primary_expression\n    type_specifier : INT\n                   | BOOL\n                   | STRING\n    \n    logical_operators : LAND\n                      | LOR\n    \n    equality_operators : EQ\n                       | NE\n    \n    relational_operators : LT\n                         | GT\n                         | LE\n                         | GE\n    \n    additive_operators : PLUS\n                       | MINUS\n    \n    multiplicative_operators : TIMES\n                             | DIVIDE\n    \n    primary_expression :  ID\n                       |  DIGIT\n    '
     
-_lr_action_items = {'IF':([0,8,33,56,59,],[6,6,6,6,6,]),'WHILE':([0,2,3,4,8,20,23,33,56,58,59,63,67,68,],[7,-1,-2,-3,7,-7,39,7,7,-11,7,-12,-10,-13,]),'DO':([0,8,33,56,59,],[8,8,8,8,8,]),'INT':([0,8,10,12,13,14,33,56,59,],[12,12,12,-4,-5,-6,12,12,12,]),'BOOL':([0,8,10,12,13,14,33,56,59,],[13,13,13,-4,-5,-6,13,13,13,]),'STRING':([0,8,10,12,13,14,33,56,59,],[14,14,14,-4,-5,-6,14,14,14,]),'ID':([0,8,10,12,13,14,21,22,24,25,27,28,29,30,31,32,33,45,46,47,48,49,50,51,52,53,54,55,56,57,59,],[17,17,17,-4,-5,-6,17,17,17,-26,17,-35,-36,17,-37,-38,17,17,-27,-28,17,-29,-30,17,-31,-32,-33,-34,17,17,17,]),'DIGIT':([0,8,10,12,13,14,21,22,24,25,27,28,29,30,31,32,33,45,46,47,48,49,50,51,52,53,54,55,56,57,59,],[18,18,18,-4,-5,-6,18,18,18,-26,18,-35,-36,18,-37,-38,18,18,-27,-28,18,-29,-30,18,-31,-32,-33,-34,18,18,18,]),'$end':([1,2,3,4,20,58,63,67,68,],[0,-1,-2,-3,-7,-11,-12,-10,-13,]),'RBRACE':([2,3,4,20,43,58,63,65,67,68,],[-1,-2,-3,-7,58,-11,-12,67,-10,-13,]),'ELSE':([3,58,67,],[19,-11,-10,]),'SEMI':([5,9,11,15,16,17,18,26,40,41,42,66,],[20,-8,-14,-22,-24,-39,-40,-9,-15,-23,-25,68,]),'LPAREN':([6,7,39,],[21,22,57,]),'EQUALS':([9,11,15,16,17,18,40,41,42,],[25,-14,-22,-24,-39,-40,-15,-23,-25,]),'PLUS':([11,15,16,17,18,37,40,41,42,62,],[28,-22,-24,-39,-40,28,28,-23,-25,28,]),'MINUS':([11,15,16,17,18,37,40,41,42,62,],[29,-22,-24,-39,-40,29,29,-23,-25,29,]),'LT':([15,16,17,18,36,37,41,42,61,62,],[-22,-24,-39,-40,52,-20,-23,-25,52,-21,]),'GT':([15,16,17,18,36,37,41,42,61,62,],[-22,-24,-39,-40,53,-20,-23,-25,53,-21,]),'LE':([15,16,17,18,36,37,41,42,61,62,],[-22,-24,-39,-40,54,-20,-23,-25,54,-21,]),'GE':([15,16,17,18,36,37,41,42,61,62,],[-22,-24,-39,-40,55,-20,-23,-25,55,-21,]),'EQ':([15,16,17,18,35,36,37,41,42,60,61,62,],[-22,-24,-39,-40,49,-18,-20,-23,-25,49,-19,-21,]),'NE':([15,16,17,18,35,36,37,41,42,60,61,62,],[-22,-24,-39,-40,50,-18,-20,-23,-25,50,-19,-21,]),'RPAREN':([15,16,17,18,34,35,36,37,38,41,42,60,61,62,64,],[-22,-24,-39,-40,44,-16,-18,-20,56,-23,-25,-17,-19,-21,66,]),'LAND':([15,16,17,18,34,35,36,37,38,41,42,60,61,62,64,],[-22,-24,-39,-40,46,-16,-18,-20,46,-23,-25,-17,-19,-21,46,]),'LOR':([15,16,17,18,34,35,36,37,38,41,42,60,61,62,64,],[-22,-24,-39,-40,47,-16,-18,-20,47,-23,-25,-17,-19,-21,47,]),'TIMES':([15,16,17,18,41,42,],[31,-24,-39,-40,31,-25,]),'DIVIDE':([15,16,17,18,41,42,],[32,-24,-39,-40,32,-25,]),'LBRACE':([19,44,],[33,59,]),}
+_lr_action_items = {'LBRACE':([0,11,24,26,28,49,],[2,2,2,2,2,-14,]),'$end':([1,22,],[0,-1,]),'IF':([2,3,4,5,6,7,22,23,25,38,39,44,65,],[9,9,-2,-4,-5,-6,-1,-3,-7,-11,-10,-12,-13,]),'WHILE':([2,3,4,5,6,7,22,23,25,29,38,39,44,65,],[10,10,-2,-4,-5,-6,-1,-3,-7,45,-11,-10,-12,-13,]),'DO':([2,3,4,5,6,7,22,23,25,38,39,44,65,],[11,11,-2,-4,-5,-6,-1,-3,-7,-11,-10,-12,-13,]),'INT':([2,3,4,5,6,7,13,15,16,17,22,23,25,38,39,44,65,],[15,15,-2,-4,-5,-6,15,-27,-28,-29,-1,-3,-7,-11,-10,-12,-13,]),'BOOL':([2,3,4,5,6,7,13,15,16,17,22,23,25,38,39,44,65,],[16,16,-2,-4,-5,-6,16,-27,-28,-29,-1,-3,-7,-11,-10,-12,-13,]),'STRING':([2,3,4,5,6,7,13,15,16,17,22,23,25,38,39,44,65,],[17,17,-2,-4,-5,-6,17,-27,-28,-29,-1,-3,-7,-11,-10,-12,-13,]),'ID':([2,3,4,5,6,7,13,15,16,17,22,23,25,27,30,32,33,34,35,36,37,38,39,44,50,51,52,53,54,55,56,57,58,59,60,65,],[20,20,-2,-4,-5,-6,20,-27,-28,-29,-1,-3,-7,20,20,20,-38,-39,20,-40,-41,-11,-10,-12,20,-30,-31,20,-32,-33,20,-34,-35,-36,-37,-13,]),'DIGIT':([2,3,4,5,6,7,13,15,16,17,22,23,25,27,30,32,33,34,35,36,37,38,39,44,50,51,52,53,54,55,56,57,58,59,60,65,],[21,21,-2,-4,-5,-6,21,-27,-28,-29,-1,-3,-7,21,21,21,-38,-39,21,-40,-41,-11,-10,-12,21,-30,-31,21,-32,-33,21,-34,-35,-36,-37,-13,]),'RBRACE':([3,4,5,6,7,22,23,25,38,39,44,65,],[22,-2,-4,-5,-6,-1,-3,-7,-11,-10,-12,-13,]),'ELSE':([6,22,38,39,],[24,-1,-11,-10,]),'SEMI':([8,12,14,18,19,20,21,31,46,47,48,49,61,],[25,-8,-15,-23,-25,-42,-43,-9,-16,-24,-26,-14,65,]),'LPAREN':([9,10,45,],[27,27,27,]),'EQUALS':([12,14,18,19,20,21,46,47,48,],[30,-15,-23,-25,-42,-43,-16,-24,-26,]),'PLUS':([14,18,19,20,21,43,46,47,48,64,],[33,-23,-25,-42,-43,33,33,-24,-26,33,]),'MINUS':([14,18,19,20,21,43,46,47,48,64,],[34,-23,-25,-42,-43,34,34,-24,-26,34,]),'LT':([18,19,20,21,42,43,47,48,63,64,],[-23,-25,-42,-43,57,-21,-24,-26,57,-22,]),'GT':([18,19,20,21,42,43,47,48,63,64,],[-23,-25,-42,-43,58,-21,-24,-26,58,-22,]),'LE':([18,19,20,21,42,43,47,48,63,64,],[-23,-25,-42,-43,59,-21,-24,-26,59,-22,]),'GE':([18,19,20,21,42,43,47,48,63,64,],[-23,-25,-42,-43,60,-21,-24,-26,60,-22,]),'EQ':([18,19,20,21,41,42,43,47,48,62,63,64,],[-23,-25,-42,-43,54,-19,-21,-24,-26,54,-20,-22,]),'NE':([18,19,20,21,41,42,43,47,48,62,63,64,],[-23,-25,-42,-43,55,-19,-21,-24,-26,55,-20,-22,]),'RPAREN':([18,19,20,21,40,41,42,43,47,48,62,63,64,],[-23,-25,-42,-43,49,-17,-19,-21,-24,-26,-18,-20,-22,]),'LAND':([18,19,20,21,40,41,42,43,47,48,62,63,64,],[-23,-25,-42,-43,51,-17,-19,-21,-24,-26,-18,-20,-22,]),'LOR':([18,19,20,21,40,41,42,43,47,48,62,63,64,],[-23,-25,-42,-43,52,-17,-19,-21,-24,-26,-18,-20,-22,]),'TIMES':([18,19,20,21,47,48,],[36,-25,-42,-43,36,-26,]),'DIVIDE':([18,19,20,21,47,48,],[37,-25,-42,-43,37,-26,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,8,33,56,59,],[1,23,43,63,65,]),'expression_statement':([0,8,33,56,59,],[2,2,2,2,2,]),'selection_statement':([0,8,33,56,59,],[3,3,3,3,3,]),'iteration_statement':([0,8,33,56,59,],[4,4,4,4,4,]),'declaration_expression':([0,8,10,33,56,59,],[5,5,26,5,5,5,]),'assignment_expression':([0,8,10,33,56,59,],[9,9,9,9,9,9,]),'type_specifier':([0,8,10,33,56,59,],[10,10,10,10,10,10,]),'additive_expression':([0,8,10,21,22,24,33,45,48,51,56,57,59,],[11,11,11,37,37,40,11,37,37,62,11,37,11,]),'multiplicative_expression':([0,8,10,21,22,24,27,33,45,48,51,56,57,59,],[15,15,15,15,15,15,41,15,15,15,15,15,15,15,]),'primary_expression':([0,8,10,21,22,24,27,30,33,45,48,51,56,57,59,],[16,16,16,16,16,16,16,42,16,16,16,16,16,16,16,]),'assignment_operators':([9,],[24,]),'additive_operators':([11,37,40,62,],[27,27,27,27,]),'multiplicative_operators':([15,41,],[30,30,]),'logical_expression':([21,22,57,],[34,38,64,]),'equality_expression':([21,22,45,57,],[35,35,60,35,]),'relational_expression':([21,22,45,48,57,],[36,36,36,61,36,]),'logical_operators':([34,38,64,],[45,45,45,]),'equality_operators':([35,60,],[48,48,]),'relational_operators':([36,61,],[51,51,]),}
+_lr_goto_items = {'block_statement_list':([0,11,24,26,28,],[1,29,38,39,44,]),'statement_list':([2,],[3,]),'statement':([2,3,],[4,23,]),'expression_statement':([2,3,],[5,5,]),'selection_statement':([2,3,],[6,6,]),'iteration_statement':([2,3,],[7,7,]),'declaration_expression':([2,3,13,],[8,8,31,]),'assignment_expression':([2,3,13,],[12,12,12,]),'type_specifier':([2,3,13,],[13,13,13,]),'additive_expression':([2,3,13,27,30,50,53,56,],[14,14,14,43,46,43,43,64,]),'multiplicative_expression':([2,3,13,27,30,32,50,53,56,],[18,18,18,18,18,47,18,18,18,]),'primary_expression':([2,3,13,27,30,32,35,50,53,56,],[19,19,19,19,19,19,48,19,19,19,]),'conditional_statement':([9,10,45,],[26,28,61,]),'additive_operators':([14,43,46,64,],[32,32,32,32,]),'multiplicative_operators':([18,47,],[35,35,]),'logical_expression':([27,],[40,]),'equality_expression':([27,50,],[41,62,]),'relational_expression':([27,50,53,],[42,42,63,]),'logical_operators':([40,],[50,]),'equality_operators':([41,62,],[53,53,]),'relational_operators':([42,63,],[56,56,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -25,45 +25,48 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> statement","S'",1,None,None,None),
-  ('statement -> expression_statement','statement',1,'p_statement','parser.py',10),
-  ('statement -> selection_statement','statement',1,'p_statement','parser.py',11),
-  ('statement -> iteration_statement','statement',1,'p_statement','parser.py',12),
-  ('type_specifier -> INT','type_specifier',1,'p_type_specifier','parser.py',19),
-  ('type_specifier -> BOOL','type_specifier',1,'p_type_specifier','parser.py',20),
-  ('type_specifier -> STRING','type_specifier',1,'p_type_specifier','parser.py',21),
-  ('expression_statement -> declaration_expression SEMI','expression_statement',2,'p_expression_statement_1','parser.py',27),
-  ('declaration_expression -> assignment_expression','declaration_expression',1,'p_declaration_expression_1','parser.py',31),
-  ('declaration_expression -> type_specifier declaration_expression','declaration_expression',2,'p_declaration_expression_2','parser.py',34),
-  ('selection_statement -> IF LPAREN logical_expression RPAREN LBRACE statement RBRACE','selection_statement',7,'p_selection_statement_1','parser.py',38),
-  ('selection_statement -> selection_statement ELSE LBRACE statement RBRACE','selection_statement',5,'p_selection_statement_2','parser.py',42),
-  ('iteration_statement -> WHILE LPAREN logical_expression RPAREN statement','iteration_statement',5,'p_iteration_statement_1','parser.py',47),
-  ('iteration_statement -> DO statement WHILE LPAREN logical_expression RPAREN SEMI','iteration_statement',7,'p_iteration_statement_2','parser.py',51),
-  ('assignment_expression -> additive_expression','assignment_expression',1,'p_assignment_expression_1','parser.py',56),
-  ('assignment_expression -> assignment_expression assignment_operators additive_expression','assignment_expression',3,'p_assignment_expression_2','parser.py',60),
-  ('logical_expression -> equality_expression','logical_expression',1,'p_logical_expression_1','parser.py',65),
-  ('logical_expression -> logical_expression logical_operators equality_expression','logical_expression',3,'p_logical_expression_2','parser.py',69),
-  ('equality_expression -> relational_expression','equality_expression',1,'p_equality_expression_1','parser.py',74),
-  ('equality_expression -> equality_expression equality_operators relational_expression','equality_expression',3,'p_equality_expression_2','parser.py',78),
-  ('relational_expression -> additive_expression','relational_expression',1,'p_relational_expression_1','parser.py',83),
-  ('relational_expression -> relational_expression relational_operators additive_expression','relational_expression',3,'p_relational_expression_2','parser.py',87),
-  ('additive_expression -> multiplicative_expression','additive_expression',1,'p_additive_expression_1','parser.py',92),
-  ('additive_expression -> additive_expression additive_operators multiplicative_expression','additive_expression',3,'p_additive_expression_2','parser.py',96),
-  ('multiplicative_expression -> primary_expression','multiplicative_expression',1,'p_multiplicative_expression_1','parser.py',101),
-  ('multiplicative_expression -> multiplicative_expression multiplicative_operators primary_expression','multiplicative_expression',3,'p_multiplicative_expression_2','parser.py',105),
-  ('assignment_operators -> EQUALS','assignment_operators',1,'p_assignment_operators','parser.py',111),
-  ('logical_operators -> LAND','logical_operators',1,'p_logical_operators','parser.py',117),
-  ('logical_operators -> LOR','logical_operators',1,'p_logical_operators','parser.py',118),
-  ('equality_operators -> EQ','equality_operators',1,'p_equality_operators','parser.py',124),
-  ('equality_operators -> NE','equality_operators',1,'p_equality_operators','parser.py',125),
-  ('relational_operators -> LT','relational_operators',1,'p_relational_operators','parser.py',131),
-  ('relational_operators -> GT','relational_operators',1,'p_relational_operators','parser.py',132),
-  ('relational_operators -> LE','relational_operators',1,'p_relational_operators','parser.py',133),
-  ('relational_operators -> GE','relational_operators',1,'p_relational_operators','parser.py',134),
-  ('additive_operators -> PLUS','additive_operators',1,'p_additive_operators','parser.py',141),
-  ('additive_operators -> MINUS','additive_operators',1,'p_additive_operators','parser.py',142),
-  ('multiplicative_operators -> TIMES','multiplicative_operators',1,'p_multiplicative_operators','parser.py',148),
-  ('multiplicative_operators -> DIVIDE','multiplicative_operators',1,'p_multiplicative_operators','parser.py',149),
-  ('primary_expression -> ID','primary_expression',1,'p_primary_expression','parser.py',155),
-  ('primary_expression -> DIGIT','primary_expression',1,'p_primary_expression','parser.py',156),
+  ("S' -> block_statement_list","S'",1,None,None,None),
+  ('block_statement_list -> LBRACE statement_list RBRACE','block_statement_list',3,'p_block_statement_list_1','parser.py',9),
+  ('statement_list -> statement','statement_list',1,'p_statement_list_1','parser.py',13),
+  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list_2','parser.py',17),
+  ('statement -> expression_statement','statement',1,'p_statement','parser.py',22),
+  ('statement -> selection_statement','statement',1,'p_statement','parser.py',23),
+  ('statement -> iteration_statement','statement',1,'p_statement','parser.py',24),
+  ('expression_statement -> declaration_expression SEMI','expression_statement',2,'p_expression_statement_1','parser.py',30),
+  ('declaration_expression -> assignment_expression','declaration_expression',1,'p_declaration_expression_1','parser.py',35),
+  ('declaration_expression -> type_specifier declaration_expression','declaration_expression',2,'p_declaration_expression_2','parser.py',39),
+  ('selection_statement -> IF conditional_statement block_statement_list','selection_statement',3,'p_selection_statement_1','parser.py',44),
+  ('selection_statement -> selection_statement ELSE block_statement_list','selection_statement',3,'p_selection_statement_2','parser.py',48),
+  ('iteration_statement -> WHILE conditional_statement block_statement_list','iteration_statement',3,'p_iteration_statement_1','parser.py',53),
+  ('iteration_statement -> DO block_statement_list WHILE conditional_statement SEMI','iteration_statement',5,'p_iteration_statement_2','parser.py',57),
+  ('conditional_statement -> LPAREN logical_expression RPAREN','conditional_statement',3,'p_conditional_statement_1','parser.py',62),
+  ('assignment_expression -> additive_expression','assignment_expression',1,'p_assignment_expression_1','parser.py',67),
+  ('assignment_expression -> assignment_expression EQUALS additive_expression','assignment_expression',3,'p_assignment_expression_2','parser.py',71),
+  ('logical_expression -> equality_expression','logical_expression',1,'p_logical_expression_1','parser.py',76),
+  ('logical_expression -> logical_expression logical_operators equality_expression','logical_expression',3,'p_logical_expression_2','parser.py',80),
+  ('equality_expression -> relational_expression','equality_expression',1,'p_equality_expression_1','parser.py',85),
+  ('equality_expression -> equality_expression equality_operators relational_expression','equality_expression',3,'p_equality_expression_2','parser.py',89),
+  ('relational_expression -> additive_expression','relational_expression',1,'p_relational_expression_1','parser.py',94),
+  ('relational_expression -> relational_expression relational_operators additive_expression','relational_expression',3,'p_relational_expression_2','parser.py',98),
+  ('additive_expression -> multiplicative_expression','additive_expression',1,'p_additive_expression_1','parser.py',103),
+  ('additive_expression -> additive_expression additive_operators multiplicative_expression','additive_expression',3,'p_additive_expression_2','parser.py',107),
+  ('multiplicative_expression -> primary_expression','multiplicative_expression',1,'p_multiplicative_expression_1','parser.py',112),
+  ('multiplicative_expression -> multiplicative_expression multiplicative_operators primary_expression','multiplicative_expression',3,'p_multiplicative_expression_2','parser.py',116),
+  ('type_specifier -> INT','type_specifier',1,'p_type_specifier','parser.py',122),
+  ('type_specifier -> BOOL','type_specifier',1,'p_type_specifier','parser.py',123),
+  ('type_specifier -> STRING','type_specifier',1,'p_type_specifier','parser.py',124),
+  ('logical_operators -> LAND','logical_operators',1,'p_logical_operators','parser.py',130),
+  ('logical_operators -> LOR','logical_operators',1,'p_logical_operators','parser.py',131),
+  ('equality_operators -> EQ','equality_operators',1,'p_equality_operators','parser.py',137),
+  ('equality_operators -> NE','equality_operators',1,'p_equality_operators','parser.py',138),
+  ('relational_operators -> LT','relational_operators',1,'p_relational_operators','parser.py',144),
+  ('relational_operators -> GT','relational_operators',1,'p_relational_operators','parser.py',145),
+  ('relational_operators -> LE','relational_operators',1,'p_relational_operators','parser.py',146),
+  ('relational_operators -> GE','relational_operators',1,'p_relational_operators','parser.py',147),
+  ('additive_operators -> PLUS','additive_operators',1,'p_additive_operators','parser.py',153),
+  ('additive_operators -> MINUS','additive_operators',1,'p_additive_operators','parser.py',154),
+  ('multiplicative_operators -> TIMES','multiplicative_operators',1,'p_multiplicative_operators','parser.py',160),
+  ('multiplicative_operators -> DIVIDE','multiplicative_operators',1,'p_multiplicative_operators','parser.py',161),
+  ('primary_expression -> ID','primary_expression',1,'p_primary_expression','parser.py',167),
+  ('primary_expression -> DIGIT','primary_expression',1,'p_primary_expression','parser.py',168),
 ]

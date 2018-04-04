@@ -5,6 +5,18 @@ import ply.yacc as yacc
 # Get the token map
 tokens = lex.tokens
 
+def p_block_statement_list_1(t):
+    'block_statement_list : LBRACE statement_list RBRACE'
+    pass
+
+def p_statement_list_1(t):
+    'statement_list : statement'
+    pass
+
+def p_statement_list_2(t):
+    'statement_list : statement_list statement'
+    pass
+
 def p_statement(t):
     '''
     statement : expression_statement
@@ -13,51 +25,50 @@ def p_statement(t):
     '''
     pass
 
-# type-specifier:
-def p_type_specifier(t):
-    '''
-    type_specifier : INT
-                      | BOOL
-                      | STRING
-    '''
-    pass
-
 # expression_statement
 def p_expression_statement_1(t):
     'expression_statement : declaration_expression SEMI'
+    pass
 
 # declaration_expression
 def p_declaration_expression_1(t):
     'declaration_expression : assignment_expression'
+    pass
 
 def p_declaration_expression_2(t):
     'declaration_expression : type_specifier declaration_expression'
+    pass
 
 # selection-statement
 def p_selection_statement_1(t):
-    'selection_statement : IF LPAREN logical_expression RPAREN LBRACE statement RBRACE'
+    'selection_statement : IF conditional_statement block_statement_list'
     pass
 
 def p_selection_statement_2(t):
-    'selection_statement : selection_statement ELSE LBRACE statement RBRACE'
+    'selection_statement : selection_statement ELSE block_statement_list'
     pass
 
-# iteration_statement:
+# iteration-statement:
 def p_iteration_statement_1(t):
-    'iteration_statement : WHILE LPAREN logical_expression RPAREN statement'
+    'iteration_statement : WHILE conditional_statement block_statement_list'
     pass
 
 def p_iteration_statement_2(t):
-    'iteration_statement : DO statement WHILE LPAREN logical_expression RPAREN SEMI'
+    'iteration_statement : DO block_statement_list WHILE conditional_statement SEMI'
     pass
 
-# assignment_expression
+# conditional-statement
+def p_conditional_statement_1(t):
+    'conditional_statement : LPAREN logical_expression RPAREN'
+    pass
+
+# assignment-expression
 def p_assignment_expression_1(t):
     'assignment_expression : additive_expression'
     pass
 
 def p_assignment_expression_2(t):
-    'assignment_expression : assignment_expression assignment_operators additive_expression'
+    'assignment_expression : assignment_expression EQUALS additive_expression'
     pass
 
 # logical-expression:
@@ -106,9 +117,11 @@ def p_multiplicative_expression_2(t):
     pass
 
 ''' TERMINALS '''
-def p_assignment_operators(t):
+def p_type_specifier(t):
     '''
-    assignment_operators : EQUALS
+    type_specifier : INT
+                   | BOOL
+                   | STRING
     '''
     pass
 
@@ -135,21 +148,20 @@ def p_relational_operators(t):
     '''
     pass
 
-# additive_operators
 def p_additive_operators(t):
     '''
     additive_operators : PLUS
                        | MINUS
     '''
+    pass
 
-# multiplicative_operators
 def p_multiplicative_operators(t):
     '''
     multiplicative_operators : TIMES
                              | DIVIDE
     '''
+    pass
 
-# primary-expression:
 def p_primary_expression(t):
     '''
     primary_expression :  ID
