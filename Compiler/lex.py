@@ -22,13 +22,15 @@ tokens = reserved + (
     # Delimeters ( ) { } . ;
     'LPAREN', 'RPAREN',
     'LBRACE', 'RBRACE',
-    'SEMI',
+    'DOT', 'SEMI',
     # STRING sentence
-    # 'STRING_SENTENCE',
+    'STRING_SENTENCE',
     # Digits
     'DIGIT',
+    # Console
+    'CONSOLE',
     # Inputs and outputs
-    # 'WRITELINE', 'READLINE'
+    'WRITELINE', 'READLINE'
 )
 
 # Completely ignored characters
@@ -39,9 +41,12 @@ def t_NEWLINE(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
 
+# Console
+t_CONSOLE = r'Console'
+
 # Inputs and outputs
-# t_WRITELINE = r'Console.WriteLine'
-# t_READLINE = r'Console.ReadLine'
+t_WRITELINE = r'WriteLine'
+t_READLINE = r'ReadLine'
 
 # Operators
 t_PLUS = r'\+'
@@ -65,10 +70,11 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
+t_DOT = r'\.'
 t_SEMI = r';'
 
 # Strings
-# t_STRING_SENTENCE = r'\".*?\"'
+t_STRING_SENTENCE = r'\".*?\"'
 
 # Identifiers and reserved words
 reserved_map = {}

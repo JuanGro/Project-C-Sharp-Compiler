@@ -25,9 +25,21 @@ def p_statement(t):
     '''
     pass
 
+def p_input_expression(t):
+    'input_expression : CONSOLE DOT READLINE'
+    pass
+
+def p_output_expression(t):
+    'output_expression : CONSOLE DOT WRITELINE conditional_expression'
+    pass
+
 # expression_statement
 def p_expression_statement_1(t):
     'expression_statement : declaration_expression SEMI'
+    pass
+
+def p_expression_statement_2(t):
+    'expression_statement : output_expression SEMI'
     pass
 
 # declaration_expression
@@ -41,7 +53,7 @@ def p_declaration_expression_2(t):
 
 # selection-statement
 def p_selection_statement_1(t):
-    'selection_statement : IF conditional_statement block_statement_list'
+    'selection_statement : IF conditional_expression block_statement_list'
     pass
 
 def p_selection_statement_2(t):
@@ -50,25 +62,29 @@ def p_selection_statement_2(t):
 
 # iteration-statement:
 def p_iteration_statement_1(t):
-    'iteration_statement : WHILE conditional_statement block_statement_list'
+    'iteration_statement : WHILE conditional_expression block_statement_list'
     pass
 
 def p_iteration_statement_2(t):
-    'iteration_statement : DO block_statement_list WHILE conditional_statement SEMI'
+    'iteration_statement : DO block_statement_list WHILE conditional_expression SEMI'
     pass
 
 # conditional-statement
-def p_conditional_statement_1(t):
-    'conditional_statement : LPAREN logical_expression RPAREN'
+def p_conditional_expression_1(t):
+    'conditional_expression : LPAREN logical_expression RPAREN'
     pass
 
 # assignment-expression
 def p_assignment_expression_1(t):
-    'assignment_expression : additive_expression'
+    'assignment_expression : variable_expression'
     pass
 
 def p_assignment_expression_2(t):
     'assignment_expression : assignment_expression EQUALS additive_expression'
+    pass
+
+def p_assignment_expression_3(t):
+    'assignment_expression : assignment_expression EQUALS input_expression'
     pass
 
 # logical-expression:
@@ -164,8 +180,15 @@ def p_multiplicative_operators(t):
 
 def p_primary_expression(t):
     '''
-    primary_expression :  ID
+    primary_expression :  variable_expression
                        |  DIGIT
+                       |  STRING_SENTENCE
+    '''
+    pass
+
+def p_variable_expression(t):
+    '''
+    variable_expression : ID
     '''
     pass
 
