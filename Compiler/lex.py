@@ -5,30 +5,30 @@ import ply.lex as lex
 
 ''' KEYWORDS that you can't use '''
 reserved = (
-   'IF', 'ELSE', 'WHILE', 'INT', 'BOOL', 'STRING'
+   'IF', 'ELSE', 'DO', 'WHILE', 'INT', 'BOOL', 'STRING'
 )
 
 ''' TOKENS to identify in the program '''
 tokens = reserved + (
-    # Inputs and outputs
-    'WRITELINE', 'READLINE',
     # Literals
     'ID',
     # Math operators
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     # Logic operators
-    'LOR', 'LAND', 'LNOT',
+    'LOR', 'LAND',
     'LT', 'LE', 'GT', 'GE', 'EQ', 'NE',
     # Assignment =
     'EQUALS',
     # Delimeters ( ) { } . ;
     'LPAREN', 'RPAREN',
-    'LBRACE', 'RBRACE',
-    'PERIOD', 'SEMI',
+    # 'LBRACE', 'RBRACE',
+    'SEMI',
     # STRING sentence
-    'STRING_SENTENCE',
+    # 'STRING_SENTENCE',
     # Digits
     'DIGIT',
+    # Inputs and outputs
+    # 'WRITELINE', 'READLINE'
 )
 
 # Completely ignored characters
@@ -40,8 +40,8 @@ def t_NEWLINE(t):
     t.lexer.lineno += t.value.count("\n")
 
 # Inputs and outputs
-t_WRITELINE = r'Console.WriteLine'
-t_READLINE = r'Console.ReadLine'
+# t_WRITELINE = r'Console.WriteLine'
+# t_READLINE = r'Console.ReadLine'
 
 # Operators
 t_PLUS = r'\+'
@@ -50,7 +50,6 @@ t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_LOR = r'\|\|'
 t_LAND = r'&&'
-t_LNOT = r'!'
 t_LT = r'<'
 t_GT = r'>'
 t_LE = r'<='
@@ -64,13 +63,12 @@ t_EQUALS = r'='
 # Delimeters
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_LBRACE = r'\{'
-t_RBRACE = r'\}'
-t_PERIOD = r'\.'
+# t_LBRACE = r'\{'
+# t_RBRACE = r'\}'
 t_SEMI = r';'
 
 # Strings
-t_STRING_SENTENCE = r'\".*?\"'
+# t_STRING_SENTENCE = r'\".*?\"'
 
 # Identifiers and reserved words
 reserved_map = {}
