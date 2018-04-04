@@ -37,6 +37,10 @@ def p_expression_statement_3(t):
     'expression_statement : input_expression SEMI'
     pass
 
+def p_expression_statement_4(t):
+    'expression_statement : empty SEMI'
+    pass
+
 # declaration-expression
 def p_declaration_expression_1(t):
     'declaration_expression : assignment_expression'
@@ -188,6 +192,10 @@ def p_variable_expression(t):
     '''
     pass
 
+def p_empty(t):
+    'empty : '
+    pass
+
 def p_error(t):
     print("Error")
 
@@ -195,3 +203,12 @@ import profile
 # Build the grammar
 
 yacc.yacc()
+
+while 1:
+    try:
+        s = input('calc > ')
+    except EOFError:
+        break
+    if not s:
+        continue
+    yacc.parse(s)
