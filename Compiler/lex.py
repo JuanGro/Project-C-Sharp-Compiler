@@ -21,7 +21,7 @@ tokens = reserved + (
     'EQUALS',
     # Delimeters ( ) { } . ;
     'LPAREN', 'RPAREN',
-    # 'LBRACE', 'RBRACE',
+    'LBRACE', 'RBRACE',
     'SEMI',
     # STRING sentence
     # 'STRING_SENTENCE',
@@ -63,8 +63,8 @@ t_EQUALS = r'='
 # Delimeters
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-# t_LBRACE = r'\{'
-# t_RBRACE = r'\}'
+t_LBRACE = r'\{'
+t_RBRACE = r'\}'
 t_SEMI = r';'
 
 # Strings
