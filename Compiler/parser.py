@@ -5,10 +5,7 @@ import ply.yacc as yacc
 # Get the token map
 tokens = lex.tokens
 
-def p_block_statement_list_1(t):
-    'block_statement_list : LBRACE statement_list RBRACE'
-    pass
-
+# statement-list
 def p_statement_list_1(t):
     'statement_list : statement'
     pass
@@ -17,6 +14,7 @@ def p_statement_list_2(t):
     'statement_list : statement_list statement'
     pass
 
+# statement
 def p_statement(t):
     '''
     statement : expression_statement
@@ -25,15 +23,7 @@ def p_statement(t):
     '''
     pass
 
-def p_input_expression(t):
-    'input_expression : CONSOLE DOT READLINE'
-    pass
-
-def p_output_expression(t):
-    'output_expression : CONSOLE DOT WRITELINE conditional_expression'
-    pass
-
-# expression_statement
+# expression-statement
 def p_expression_statement_1(t):
     'expression_statement : declaration_expression SEMI'
     pass
@@ -42,7 +32,12 @@ def p_expression_statement_2(t):
     'expression_statement : output_expression SEMI'
     pass
 
-# declaration_expression
+# I am not sure!
+def p_expression_statement_3(t):
+    'expression_statement : input_expression SEMI'
+    pass
+
+# declaration-expression
 def p_declaration_expression_1(t):
     'declaration_expression : assignment_expression'
     pass
@@ -69,6 +64,11 @@ def p_iteration_statement_2(t):
     'iteration_statement : DO block_statement_list WHILE conditional_expression SEMI'
     pass
 
+# block-statement-list
+def p_block_statement_list_1(t):
+    'block_statement_list : LBRACE statement_list RBRACE'
+    pass
+
 # conditional-statement
 def p_conditional_expression_1(t):
     'conditional_expression : LPAREN logical_expression RPAREN'
@@ -80,7 +80,7 @@ def p_assignment_expression_1(t):
     pass
 
 def p_assignment_expression_2(t):
-    'assignment_expression : assignment_expression EQUALS additive_expression'
+    'assignment_expression : assignment_expression EQUALS logical_expression'
     pass
 
 def p_assignment_expression_3(t):
@@ -107,29 +107,30 @@ def p_equality_expression_2(t):
 
 # relational-expression:
 def p_relational_expression_1(t):
-    'relational_expression : additive_expression'
+    'relational_expression : math_expression'
     pass
 
 def p_relational_expression_2(t):
-    'relational_expression : relational_expression relational_operators additive_expression'
+    'relational_expression : relational_expression relational_operators math_expression'
     pass
 
-# additive-expression
-def p_additive_expression_1(t):
-    'additive_expression : multiplicative_expression'
+# math-expression
+def p_math_expression_1(t):
+    'math_expression : primary_expression'
     pass
 
-def p_additive_expression_2(t):
-    'additive_expression : additive_expression additive_operators multiplicative_expression'
+def p_math_expression_2(t):
+    'math_expression : math_expression math_operators primary_expression'
     pass
 
-# multiplicative_expression
-def p_multiplicative_expression_1(t):
-    'multiplicative_expression : primary_expression'
+# input-expression
+def p_input_expression(t):
+    'input_expression : CONSOLE DOT READLINE'
     pass
 
-def p_multiplicative_expression_2(t):
-    'multiplicative_expression : multiplicative_expression multiplicative_operators primary_expression'
+# output-expression
+def p_output_expression(t):
+    'output_expression : CONSOLE DOT WRITELINE conditional_expression'
     pass
 
 ''' TERMINALS '''
@@ -164,17 +165,12 @@ def p_relational_operators(t):
     '''
     pass
 
-def p_additive_operators(t):
+def p_math_operators(t):
     '''
-    additive_operators : PLUS
-                       | MINUS
-    '''
-    pass
-
-def p_multiplicative_operators(t):
-    '''
-    multiplicative_operators : TIMES
-                             | DIVIDE
+    math_operators : PLUS
+                   | MINUS
+                   | TIMES
+                   | DIVIDE
     '''
     pass
 
@@ -193,7 +189,7 @@ def p_variable_expression(t):
     pass
 
 def p_error(t):
-    print("Whoa. We're hosed")
+    print("Error")
 
 import profile
 # Build the grammar
