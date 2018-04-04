@@ -33,16 +33,15 @@ def p_expression_statement_1(t):
     pass
 
 def p_expression_statement_2(t):
-    'expression_statement : output_expression SEMI'
+    'expression_statement : empty SEMI'
     pass
 
-# I am not sure!
 def p_expression_statement_3(t):
     'expression_statement : input_expression SEMI'
     pass
 
 def p_expression_statement_4(t):
-    'expression_statement : empty SEMI'
+    'expression_statement : output_expression SEMI'
     pass
 
 # declaration-expression
@@ -133,7 +132,7 @@ def p_math_expression_2(t):
 
 # input-expression
 def p_input_expression(t):
-    'input_expression : CONSOLE DOT READLINE'
+    'input_expression : CONSOLE DOT READLINE LPAREN RPAREN'
     pass
 
 # output-expression
@@ -202,7 +201,7 @@ def p_empty(t):
     pass
 
 def p_error(t):
-    print("Error", t)
+    print("ERROR:", t.value)
 
 import profile
 # Build the grammar

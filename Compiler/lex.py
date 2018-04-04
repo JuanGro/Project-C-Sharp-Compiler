@@ -5,7 +5,8 @@ import ply.lex as lex
 
 ''' KEYWORDS that you can't use '''
 reserved = (
-   'IF', 'ELSE', 'DO', 'WHILE', 'INT', 'BOOL', 'STRING'
+   'IF', 'ELSE', 'DO', 'WHILE', 'INT', 'BOOL', 'STRING',
+   'CONSOLE', 'WRITELINE', 'READLINE'
 )
 
 ''' TOKENS to identify in the program '''
@@ -26,11 +27,7 @@ tokens = reserved + (
     # STRING sentence
     'STRING_SENTENCE',
     # Digits
-    'DIGIT',
-    # Console
-    'CONSOLE',
-    # Inputs and outputs
-    'WRITELINE', 'READLINE'
+    'DIGIT'
 )
 
 # Completely ignored characters
@@ -40,13 +37,6 @@ t_ignore = ' \t\x0c'
 def t_NEWLINE(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
-
-# Console
-t_CONSOLE = r'Console'
-
-# Inputs and outputs
-t_WRITELINE = r'WriteLine'
-t_READLINE = r'ReadLine'
 
 # Operators
 t_PLUS = r'\+'
