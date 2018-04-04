@@ -1,71 +1,85 @@
 import sys
 
-if ".." not in sys.path: sys.path.insert(0,"..")
+if ".." not in sys.path: sys.path.insert(0, "..")
 import ply.lex as lex
 
 ''' KEYWORDS that you can't use '''
-keywords = {
-   'if' : 'IF',
-   'else' : 'ELSE',
-   'while' : 'WHILE',
-   'int' : 'INTEGER_TYPE',
-   'bool' : 'BOOLEAN_TYPE',
-   'string' : 'STRING_TYPE',
-   'false' : 'FALSE',
-   'true' : 'TRUE',
-   'Console.ReadLine': 'READ',
-   'Console.WriteLine' : 'WRITE',
-}
+reserved = (
+   'IF', 'ELSE', 'WHILE', 'INT', 'BOOL', 'STRING'
+)
 
 ''' TOKENS to identify in the program '''
-tokens = list(keywords.values()) + [
+tokens = reserved + (
+    # Inputs and outputs
+    'WRITELINE', 'READLINE',
+    # Literals
+    'ID',
     # Math operators
-    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'POWER',
+    'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     # Logic operators
-    'EQUALS', 'NOT_EQUALS', 'LESS_EQUAL_THAN', 'GREATER_EQUAL_THAN', 'LESS_THAN', 'GREATER_THAN', 'AND', 'OR', 'NOT',
-    # Others
-    'ASSIGN', 'SEMICOLON', 'QUOTATION_MARK',
-    # Symbols
-    'LEFT_BRACKET', 'RIGHT_BRACKET', 'LEFT_PARENTHESIS', 'RIGHT_PARENTHESIS',
-    # Inputs and outputs
-    'ID', 'DIGIT', 'STRING']
+    'LOR', 'LAND', 'LNOT',
+    'LT', 'LE', 'GT', 'GE', 'EQ', 'NE',
+    # Assignment =
+    'EQUALS',
+    # Delimeters ( ) { } . ;
+    'LPAREN', 'RPAREN',
+    'LBRACE', 'RBRACE',
+    'PERIOD', 'SEMI',
+    # STRING sentence
+    'STRING_SENTENCE',
+    # Digits
+    'DIGIT',
+)
 
-# Math operators
-t_PLUS               = r'\+'
-t_MINUS              = r'-'
-t_TIMES              = r'\*'
-t_DIVIDE             = r'/'
-t_POWER              = r'\^'
+# Completely ignored characters
+t_ignore = ' \t\x0c'
 
-# Logic operators
-t_EQUALS             = r'\=\='
-t_NOT_EQUALS         = r'\!\='
-t_LESS_EQUAL_THAN    = r'\<\='
-t_GREATER_EQUAL_THAN = r'\>\='
-t_LESS_THAN          = r'\<'
-t_GREATER_THAN       = r'\>'
-t_AND                = r'!\&\&'
-t_OR                 = r'\|\|'
-t_NOT                = r'\!'
-
-# Others
-t_ASSIGN             = r'='
-t_SEMICOLON          = r';'
-t_QUOTATION_MARK     = r'"'
-
-# Symbols
-t_LEFT_BRACKET       = r'\{'
-t_RIGHT_BRACKET      = r'\}'
-t_LEFT_PARENTHESIS   = r'\('
-t_RIGHT_PARENTHESIS  = r'\)'
+# Newlines
+def t_NEWLINE(t):
+    r'\n+'
+    t.lexer.lineno += t.value.count("\n")
 
 # Inputs and outputs
-t_STRING             = r'\".*?\"'
+t_WRITELINE = r'Console.WriteLine'
+t_READLINE = r'Console.ReadLine'
 
-''' Function to identify an ID for a variable '''
+# Operators
+t_PLUS = r'\+'
+t_MINUS = r'-'
+t_TIMES = r'\*'
+t_DIVIDE = r'/'
+t_LOR = r'\|\|'
+t_LAND = r'&&'
+t_LNOT = r'!'
+t_LT = r'<'
+t_GT = r'>'
+t_LE = r'<='
+t_GE = r'>='
+t_EQ = r'=='
+t_NE = r'!='
+
+# Assignment operators
+t_EQUALS = r'='
+
+# Delimeters
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+t_LBRACE = r'\{'
+t_RBRACE = r'\}'
+t_PERIOD = r'\.'
+t_SEMI = r';'
+
+# Strings
+t_STRING_SENTENCE = r'\".*?\"'
+
+# Identifiers and reserved words
+reserved_map = {}
+for r in reserved:
+    reserved_map[r.lower()] = r
+
 def t_ID(t):
-    r'[a-zA-Z_.][a-zA-Z_.0-9]*'
-    t.type = keywords.get(t.value, 'ID')    # Check for reserved words
+    r'[a-z_][\w_]*'
+    t.type = reserved_map.get(t.value, "ID")
     return t
 
 ''' Function to identify a number '''
@@ -81,15 +95,7 @@ def t_DIGIT(t):
 ''' Function to ignore comments '''
 def t_comment(t):
     r'(/\*(.|\n)*?\*/)|(//.*)'
-    print("Comment present")
-
-''' Ignore the tabs and spaces '''
-t_ignore = " \t"
-
-''' Function to avoid new line as a token '''
-def t_newline(t):
-    r'\n+'
-    t.lexer.lineno += t.value.count("\n")
+    # print("Comment present")
 
 ''' Function to know if there is a token not recognized '''
 def t_error(t):
@@ -154,7 +160,8 @@ while(number1 <= 50) {
 }
 */
 
-Console.WriteLine("Result");
+string sentence_aux = "Result";
+Console.WriteLine(sentence_aux);
 Console.WriteLine(number1);
 '''
 test10 = '''
@@ -164,7 +171,7 @@ bool flag;
 test11 = '''
 "Hello World";
 Console.WriteLine(int number1);
-Console.WriteLine(int NUMBER2);
+Console.WriteLine(int number_Aux2);
 '''
 test12 = '''
 int number3 = 0;
