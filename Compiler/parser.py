@@ -223,7 +223,8 @@ def p_math_operators(t):
 def p_primary_expression(t):
     '''
     primary_expression :  variable_expression
-                       |  boolean_expression
+                       |  TRUE
+                       |  FALSE
                        |  DIGIT
                        |  STRING_SENTENCE
     '''
@@ -238,15 +239,6 @@ def p_variable_expression(t):
     '''
     T = Node(t[1], t[1])
     t[0] = Node('variable_expression', None, None, [T])
-
-# boolean-expression
-def p_boolean_expression(t):
-    '''
-    boolean_expression : TRUE
-                       | FALSE
-    '''
-    T = Node(t[1], t[1])
-    t[0] = Node('boolean_expression', None, None, [T])
 
 def p_empty(t):
     'empty : '
