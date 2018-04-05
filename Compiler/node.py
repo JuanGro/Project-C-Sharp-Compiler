@@ -9,7 +9,7 @@ class Node:
                 self.children = []
 
     def get_values(self):
-        return string str(self.token)
+        return str(self.token)
 
     def print_node(self):
         if self.children:
