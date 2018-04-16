@@ -16,7 +16,7 @@ test4 = '''
 bool FLAG = true;
 '''
 test5 = '''
-Console.WriteLine("Hello World!");
+console.writeline("Hello World!");
 '''
 test6 = '''
 int number3 = 7;
@@ -34,8 +34,8 @@ while(number1 <= 50) {
 }
 '''
 test8 = '''
-Console.ReadLine();
-Console.WriteLine("Hello World!");
+console.readline();
+console.writeline("Hello World!");
 '''
 test9 = '''
 bool flag = false;
@@ -44,7 +44,7 @@ name2 = "Carlos";
 
 if(number1 == 35) {
     // flag = true;
-    number1 = Console.ReadLine();
+    number1 = console.readline();
 } else {
     flag = false;
 }
@@ -56,8 +56,8 @@ while(number1 <= 50) {
 */
 
 string sentence_aux = "Result";
-Console.WriteLine(sentence_aux);
-Console.WriteLine(number1);
+console.writeline(sentence_aux);
+console.writeline(number1);
 '''
 test10 = '''
 flag = false;
@@ -65,8 +65,8 @@ bool flag;
 '''
 test11 = '''
 "Hello World";
-Console.WriteLine(int number1);
-Console.WriteLine(int number_Aux2);
+console.writeline(int number1);
+console.writeline(int number_Aux2);
 '''
 test12 = '''
 int number3 = 0;
