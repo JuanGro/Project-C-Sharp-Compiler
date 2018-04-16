@@ -13,7 +13,7 @@ def p_program(t):
 # statement-list
 def p_statement_list_1(t):
     'statement_list : empty'
-    t[0] = Node("statement_list", None, None, None)
+    t[0] = Node("statement_list", None, None, [t[1]])
 
 def p_statement_list_2(t):
     'statement_list : statement'
@@ -227,8 +227,11 @@ def p_primary_expression(t):
                        |  DIGIT
                        |  STRING_SENTENCE
     '''
-    T = Node(t[1], t[1])
-    t[0] = Node('primary_expression', None, None, [T])
+    if isinstance(t[1], Node) == True:
+        t[0] = Node('primary_expression', None, None, [t[1]])
+    else:
+        T = Node(t[1], t[1])
+        t[0] = Node('primary_expression', None, None, [T])
 
 # variable-expression
 def p_variable_expression(t):
@@ -249,7 +252,8 @@ def p_boolean_expression(t):
 
 def p_empty(t):
     'empty : '
-    t[0] = Node('empty', None, None, None)
+    T = Node('" "', '" "')
+    t[0] = Node('empty', None, None, [T])
 
 def p_error(t):
     print("ERROR:", t.value)
