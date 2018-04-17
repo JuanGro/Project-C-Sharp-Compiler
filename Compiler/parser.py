@@ -252,7 +252,7 @@ def p_boolean_expression(t):
 
 def p_empty(t):
     'empty : '
-    T = Node('" "', '" "')
+    T = Node('', '')
     t[0] = Node('empty', None, None, [T])
 
 def p_error(t):
