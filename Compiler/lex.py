@@ -72,12 +72,12 @@ for r in reserved:
     reserved_map[r.lower()] = r
 
 def t_ID(t):
-    r'[a-z_][\w_]*'
+    r'[a-z][a-zA-Z_0-9]*'
     t.type = reserved_map.get(t.value, "ID")
     return t
 
 def t_CONSTANT(t):
-    r'[A-Z_][\w_]*'
+    r'[A-Z][A-Z_0-9]*'
     t.type = reserved_map.get(t.value, "CONSTANT")
     return t
 

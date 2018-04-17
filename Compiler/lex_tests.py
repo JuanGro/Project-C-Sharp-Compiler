@@ -55,8 +55,8 @@ while(number1 <= 50) {
 }
 */
 
-string sentence_aux = "Result";
-console.writeline(sentence_aux);
+string SENTENCE_AUX = "Result";
+console.writeline(SENTENCE_AUX);
 console.writeline(number1);
 '''
 test10 = '''
@@ -65,7 +65,7 @@ bool flag;
 '''
 test11 = '''
 "Hello World";
-console.writeline(int number1);
+console.writeline(int NUMBER1);
 console.writeline(int number_Aux2);
 '''
 test12 = '''
