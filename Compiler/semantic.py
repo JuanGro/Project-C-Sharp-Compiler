@@ -1,28 +1,28 @@
 from parser import *
 
-symbolTable = []
-
 def getSymbolTable(x):
-    # print(x)
-    for element in x:
-        if element == 'int' or element == 'bool' or element == 'string':
-            dictionary = {}
-            dictionary['type'] = element
-            dictionary['name'] = ""
-            dictionary['value'] = 0
-            symbolTable.append(dictionary)
-        elif element == 'true' or element == 'false' or str(element).isnumeric() == True or '"' in element:
-            dictionary['value'] = element
+    symbolTable = []
+    if len(x) > 0:
+        # print(x)
+        for element in x:
+            if element == 'int' or element == 'bool' or element == 'string':
+                dictionary = {}
+                dictionary['type'] = element
+                dictionary['name'] = ""
+                dictionary['value'] = 0
+                symbolTable.append(dictionary)
+            elif element == 'true' or element == 'false' or str(element).isnumeric() == True or '"' in element:
+                dictionary['value'] = element
+            else:
+                if not any(d['name'] == element for d in symbolTable):
+                    dictionary['name'] = element
+                # else:
+                #     print("Error, variable already declared")
+                #     symbolTable.pop()
+        if twoDeclarations(symbolTable) == True:
+            print("Declaration repeated")
         else:
-            if not any(d['name'] == element for d in symbolTable):
-                dictionary['name'] = element
-            # else:
-            #     print("Error, variable already declared")
-            #     symbolTable.pop()
-    if twoDeclarations(symbolTable) == True:
-        print("Declaration repeated")
-    else:
-        printSymbolTable(symbolTable)
+            printSymbolTable(symbolTable)
 
 def printSymbolTable(symbolTable):
     print("ID" + "\t" + "|" + "Type" + "\t" + "|" + "Value")
@@ -34,5 +34,3 @@ def twoDeclarations(symbolTable):
         if element['name'] == '':
             return True
     return False
-
-getSymbolTable(x)

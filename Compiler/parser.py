@@ -265,4 +265,8 @@ def p_empty(t):
 def p_error(t):
     print("ERROR:", t.value)
 
+def emptyTerminals(x):
+    while len(x) > 0:
+        x.pop()
+
 yacc.yacc()
