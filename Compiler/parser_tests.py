@@ -24,6 +24,9 @@ bool flag2 = false;
 string name1 = "Juan";
 '''
 test7 = '''
+int number1 = 0;
+bool flag = false;
+
 while(number1 <= 50) {
     number1 = number1 + 1;
     if(number1 == 35) {
@@ -42,7 +45,7 @@ console.writeline("Hello World!");
 '''
 test9 = '''
 bool flag = false;
-// int number1 = 3 + 4 * 5;
+int number1 = 3 + 4 * 5;
 name2 = "Carlos";
 
 if(number1 == 35) {
@@ -140,3 +143,6 @@ print(t.print_node())
 print("\nTest 13:")
 t = yacc.parse(test13)
 print(t.print_node())
+
+print("X", x)
+getSymbolTable(x)

@@ -5,6 +5,8 @@ import ply.yacc as yacc
 
 # Get the token map
 tokens = lex.tokens
+x = []
+symbolTable = []
 
 def p_program(t):
     'program : statement_list'
@@ -178,6 +180,7 @@ def p_type_specifier(t):
     '''
     T = Node(t[1], t[1])
     t[0] = Node('type_specifier', None, None, [T])
+    x.append(t[1])
 
 # logical-operators
 def p_logical_operators(t):
@@ -232,6 +235,7 @@ def p_primary_expression(t):
     else:
         T = Node(t[1], t[1])
         t[0] = Node('primary_expression', None, None, [T])
+        x.append(t[1])
 
 # variable-expression
 def p_variable_expression(t):
@@ -241,6 +245,7 @@ def p_variable_expression(t):
     '''
     T = Node(t[1], t[1])
     t[0] = Node('variable_expression', None, None, [T])
+    x.append(t[1])
 
 def p_boolean_expression(t):
     '''
@@ -249,6 +254,7 @@ def p_boolean_expression(t):
     '''
     T = Node(t[1], t[1])
     t[0] = Node('boolean_expression', None, None, [T])
+    x.append(t[1])
 
 def p_empty(t):
     'empty : '
@@ -257,6 +263,40 @@ def p_empty(t):
 
 def p_error(t):
     print("ERROR:", t.value)
+
+''' Semantic '''
+def getSymbolTable(x):
+    # print(x)
+    for element in x:
+        if element == 'int' or element == 'bool' or element == 'string':
+            dictionary = {}
+            dictionary['type'] = element
+            dictionary['name'] = ""
+            dictionary['value'] = 0
+            symbolTable.append(dictionary)
+        elif element == 'true' or element == 'false' or str(element).isnumeric() == True or '"' in element:
+            dictionary['value'] = element
+        else:
+            if not any(d['name'] == element for d in symbolTable):
+                dictionary['name'] = element
+            # else:
+            #     print("Error, variable already declared")
+            #     symbolTable.pop()
+    if twoDeclarations(symbolTable) == True:
+        print("Declaration repeated")
+    else:
+        printSymbolTable(symbolTable)
+
+def printSymbolTable(symbolTable):
+    print("ID" + "\t" + "|" + "Type" + "\t" + "|" + "Value")
+    for element in symbolTable:
+        print(element['name'] + "\t" + "|" + element['type'] + "\t" + "|" + str(element['value']))
+
+def twoDeclarations(symbolTable):
+    for element in symbolTable:
+        if element['name'] == '':
+            return True
+    return False
 
 import profile
 # Build the grammar
