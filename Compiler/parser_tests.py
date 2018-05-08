@@ -143,6 +143,3 @@ print(t.print_node())
 print("\nTest 13:")
 t = yacc.parse(test13)
 print(t.print_node())
-
-print("X", x)
-getSymbolTable(x)

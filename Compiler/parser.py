@@ -5,8 +5,9 @@ import ply.yacc as yacc
 
 # Get the token map
 tokens = lex.tokens
+
+# terminals
 x = []
-symbolTable = []
 
 def p_program(t):
     'program : statement_list'
@@ -263,42 +264,5 @@ def p_empty(t):
 
 def p_error(t):
     print("ERROR:", t.value)
-
-''' Semantic '''
-def getSymbolTable(x):
-    # print(x)
-    for element in x:
-        if element == 'int' or element == 'bool' or element == 'string':
-            dictionary = {}
-            dictionary['type'] = element
-            dictionary['name'] = ""
-            dictionary['value'] = 0
-            symbolTable.append(dictionary)
-        elif element == 'true' or element == 'false' or str(element).isnumeric() == True or '"' in element:
-            dictionary['value'] = element
-        else:
-            if not any(d['name'] == element for d in symbolTable):
-                dictionary['name'] = element
-            # else:
-            #     print("Error, variable already declared")
-            #     symbolTable.pop()
-    if twoDeclarations(symbolTable) == True:
-        print("Declaration repeated")
-    else:
-        printSymbolTable(symbolTable)
-
-def printSymbolTable(symbolTable):
-    print("ID" + "\t" + "|" + "Type" + "\t" + "|" + "Value")
-    for element in symbolTable:
-        print(element['name'] + "\t" + "|" + element['type'] + "\t" + "|" + str(element['value']))
-
-def twoDeclarations(symbolTable):
-    for element in symbolTable:
-        if element['name'] == '':
-            return True
-    return False
-
-import profile
-# Build the grammar
 
 yacc.yacc()
