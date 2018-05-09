@@ -29,7 +29,8 @@ int num1 = 9;
 if (num1 > num2) {
     result = num1;
     num1 = 10;
-} else {
+}
+else {
     result = num2;
 }
 '''
@@ -39,28 +40,34 @@ print("\nTest 1:")
 t = yacc.parse(test1)
 getSymbolTable(x)
 emptyTerminals(x)
+generateCode(test1, 'test1')
 
 print("\nTest 2:")
 t = yacc.parse(test2)
 getSymbolTable(x)
 emptyTerminals(x)
+generateCode(test2, 'test2')
 
 print("\nTest 3:")
 t = yacc.parse(test3)
 getSymbolTable(x)
 emptyTerminals(x)
+generateCode(test3, 'test3')
 
 print("\nTest 4:")
 t = yacc.parse(test4)
 getSymbolTable(x)
 emptyTerminals(x)
+generateCode(test4, 'test4')
 
 print("\nTest 5:")
 t = yacc.parse(test5)
 getSymbolTable(x)
 emptyTerminals(x)
+generateCode(test5, 'test5')
 
 print("\nTest 6:")
 t = yacc.parse(test6)
 getSymbolTable(x)
 emptyTerminals(x)
+generateCode(test6, 'test6')

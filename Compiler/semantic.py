@@ -1,4 +1,5 @@
 from parser import *
+from generate_code import *
 
 def getSymbolTable(x):
     symbolTable = []
