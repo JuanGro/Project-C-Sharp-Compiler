@@ -16,7 +16,7 @@ tokensDictionary = {
 
 symbolsDictionary = {
     '(' : ' ',
-    ')' : ':',
+    ')' : ' ',
     '{' : ' ',
     '}' : ' ',
     ';' : ' ',
@@ -46,6 +46,5 @@ def generateCode(test, filename):
             code += " "
         else:
             code += element + " "
-    print("CODE:", code)
     f = open('output/' + filename + '.py', 'w')
     f.write(code)

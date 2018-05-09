@@ -25,7 +25,9 @@ def getSymbolTable(x):
                     dictionary['name'] = element
                     if 'type' not in dictionary:
                         print(element, "not initialized")
+                        emptyTerminals(x)
                         return 'error'
+        emptyTerminals(x)
         if twoDeclarations(symbolTable) == True:
             print("Declaration repeated")
             return 'error'
