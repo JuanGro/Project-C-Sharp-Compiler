@@ -8,7 +8,12 @@ def getSymbolTable(x):
             if element == 'int' or element == 'bool' or element == 'string':
                 dictionary['type'] = element
                 dictionary['name'] = ""
-                dictionary['value'] = 0
+                if element == 'int':
+                    dictionary['value'] = 0
+                elif element == 'bool':
+                    dictionary['value'] = 'true'
+                else:
+                    dictionary['value'] = '""'
                 symbolTable.append(dictionary)
             elif element == 'true' or element == 'false' or str(element).isnumeric() == True or '"' in element:
                 dictionary['value'] = element
@@ -17,9 +22,8 @@ def getSymbolTable(x):
             else:
                 if not any(d['name'] == element for d in symbolTable):
                     dictionary['name'] = element
-                # else:
-                #     print("Error, variable already declared")
-                #     symbolTable.pop()
+                    if 'type' not in dictionary:
+                        print(element, "not initialized")
         if twoDeclarations(symbolTable) == True:
             print("Declaration repeated")
         else:

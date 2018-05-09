@@ -2,8 +2,9 @@ from semantic import *
 
 # Test it out
 test1 = '''
+console.writeline("Hi");
 int a;
-a = "hello";
+string b;
 '''
 test2 = '''
 int number3 = 7;
@@ -15,9 +16,11 @@ int number2 = 6;
 '''
 test4 = '''
 bool FLAG = true;
+bool FLAG = false;
 '''
 test5 = '''
-console.writeline("Hi");
+int a;
+a = "hello";
 '''
 test6 = '''
 int result;
