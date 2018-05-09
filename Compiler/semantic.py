@@ -26,9 +26,10 @@ def getSymbolTable(x):
             printSymbolTable(symbolTable)
 
 def printSymbolTable(symbolTable):
-    print("ID" + "\t" + "|" + "Type" + "\t" + "|" + "Value")
-    for element in symbolTable:
-        print(element['name'] + "\t" + "|" + element['type'] + "\t" + "|" + str(element['value']))
+    if len(symbolTable) > 0:
+        print("ID" + "\t" + "|" + "Type" + "\t" + "|" + "Value")
+        for element in symbolTable:
+            print(element['name'] + "\t" + "|" + element['type'] + "\t" + "|" + str(element['value']))
 
 def twoDeclarations(symbolTable):
     for element in symbolTable:
