@@ -33,6 +33,7 @@ def getSymbolTable(x):
             return 'error'
         else:
             printSymbolTable(symbolTable)
+            return 0
 
 def printSymbolTable(symbolTable):
     if len(symbolTable) > 0:

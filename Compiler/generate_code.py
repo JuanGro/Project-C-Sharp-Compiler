@@ -46,5 +46,20 @@ def generateCode(test, filename):
             code += " "
         else:
             code += element + " "
-    f = open('output/' + filename + '.py', 'w')
+    completeFilename = 'output/' + filename + '.py'
+    f = open(completeFilename, 'w')
     f.write(code)
+
+    with open(completeFilename) as f:
+        solveConflicts(f, completeFilename)
+
+
+def solveConflicts(f, filename):
+    newCode = ""
+    for line in f:
+        if 'if' in line or 'while' in line:
+            line = line.replace('\n', '')
+            line += ':\n'
+        newCode += line
+    f = open(filename, 'w')
+    f.write(newCode)

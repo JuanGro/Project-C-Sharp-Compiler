@@ -33,6 +33,7 @@ if (num1 > num2) {
 else {
     result = num2;
 }
+console.writeline(result);
 '''
 
 # Check tests
