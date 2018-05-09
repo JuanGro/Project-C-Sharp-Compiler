@@ -37,22 +37,22 @@ def p_statement(t):
 
 # expression-statement
 def p_expression_statement_1(t):
-    'expression_statement : declaration_expression SEMI'
+    'expression_statement : declaration_expression semicolon'
     T = Node(t[2], t[2])
     t[0] = Node("expression_statement", None, None, [t[1], T])
 
 def p_expression_statement_2(t):
-    'expression_statement : empty SEMI'
+    'expression_statement : empty semicolon'
     T = Node(t[2], t[2])
     t[0] = Node("expression_statement", None, None, [t[1], T])
 
 def p_expression_statement_3(t):
-    'expression_statement : input_expression SEMI'
+    'expression_statement : input_expression semicolon'
     T = Node(t[2], t[2])
     t[0] = Node("expression_statement", None, None, [t[1], T])
 
 def p_expression_statement_4(t):
-    'expression_statement : output_expression SEMI'
+    'expression_statement : output_expression semicolon'
     T = Node(t[2], t[2])
     t[0] = Node("expression_statement", None, None, [t[1], T])
 
@@ -252,6 +252,14 @@ def p_boolean_expression(t):
     '''
     boolean_expression : TRUE
                        | FALSE
+    '''
+    T = Node(t[1], t[1])
+    t[0] = Node('boolean_expression', None, None, [T])
+    x.append(t[1])
+
+def p_semicolon(t):
+    '''
+    semicolon : SEMI
     '''
     T = Node(t[1], t[1])
     t[0] = Node('boolean_expression', None, None, [T])

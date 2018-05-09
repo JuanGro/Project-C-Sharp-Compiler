@@ -3,16 +3,17 @@ from parser import *
 def getSymbolTable(x):
     symbolTable = []
     if len(x) > 0:
-        # print(x)
+        dictionary = {}
         for element in x:
             if element == 'int' or element == 'bool' or element == 'string':
-                dictionary = {}
                 dictionary['type'] = element
                 dictionary['name'] = ""
                 dictionary['value'] = 0
                 symbolTable.append(dictionary)
             elif element == 'true' or element == 'false' or str(element).isnumeric() == True or '"' in element:
                 dictionary['value'] = element
+            elif element == ';':
+                dictionary = {}
             else:
                 if not any(d['name'] == element for d in symbolTable):
                     dictionary['name'] = element

@@ -10,10 +10,10 @@ Rule 4     statement_list -> statement_list statement
 Rule 5     statement -> expression_statement
 Rule 6     statement -> selection_statement
 Rule 7     statement -> iteration_statement
-Rule 8     expression_statement -> declaration_expression SEMI
-Rule 9     expression_statement -> empty SEMI
-Rule 10    expression_statement -> input_expression SEMI
-Rule 11    expression_statement -> output_expression SEMI
+Rule 8     expression_statement -> declaration_expression semicolon
+Rule 9     expression_statement -> empty semicolon
+Rule 10    expression_statement -> input_expression semicolon
+Rule 11    expression_statement -> output_expression semicolon
 Rule 12    declaration_expression -> assignment_expression
 Rule 13    declaration_expression -> type_specifier declaration_expression
 Rule 14    selection_statement -> IF conditional_expression block_statement_list
@@ -58,7 +58,8 @@ Rule 52    variable_expression -> ID
 Rule 53    variable_expression -> CONSTANT
 Rule 54    boolean_expression -> TRUE
 Rule 55    boolean_expression -> FALSE
-Rule 56    empty -> <empty>
+Rule 56    semicolon -> SEMI
+Rule 57    empty -> <empty>
 
 Terminals, with rules where they appear
 
@@ -90,7 +91,7 @@ PLUS                 : 44
 RBRACE               : 18
 READLINE             : 31
 RPAREN               : 19 31
-SEMI                 : 8 9 10 11
+SEMI                 : 56
 STRING               : 35
 STRING_SENTENCE      : 51
 TIMES                : 46
@@ -122,6 +123,7 @@ program              : 0
 relational_expression : 25 26 28
 relational_operators : 28
 selection_statement  : 6 15
+semicolon            : 8 9 10 11
 statement            : 3 4
 statement_list       : 1 4 18
 type_specifier       : 13
@@ -136,14 +138,14 @@ state 0
     (2) statement_list -> . empty
     (3) statement_list -> . statement
     (4) statement_list -> . statement_list statement
-    (56) empty -> .
+    (57) empty -> .
     (5) statement -> . expression_statement
     (6) statement -> . selection_statement
     (7) statement -> . iteration_statement
-    (8) expression_statement -> . declaration_expression SEMI
-    (9) expression_statement -> . empty SEMI
-    (10) expression_statement -> . input_expression SEMI
-    (11) expression_statement -> . output_expression SEMI
+    (8) expression_statement -> . declaration_expression semicolon
+    (9) expression_statement -> . empty semicolon
+    (10) expression_statement -> . input_expression semicolon
+    (11) expression_statement -> . output_expression semicolon
     (14) selection_statement -> . IF conditional_expression block_statement_list
     (15) selection_statement -> . selection_statement ELSE block_statement_list
     (16) iteration_statement -> . WHILE conditional_expression block_statement_list
@@ -170,8 +172,8 @@ state 0
   ! shift/reduce conflict for STRING resolved as shift
   ! shift/reduce conflict for ID resolved as shift
   ! shift/reduce conflict for CONSTANT resolved as shift
-    SEMI            reduce using rule 56 (empty -> .)
-    $end            reduce using rule 56 (empty -> .)
+    SEMI            reduce using rule 57 (empty -> .)
+    $end            reduce using rule 57 (empty -> .)
     IF              shift and go to state 11
     WHILE           shift and go to state 12
     DO              shift and go to state 13
@@ -182,15 +184,15 @@ state 0
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
 
-  ! IF              [ reduce using rule 56 (empty -> .) ]
-  ! WHILE           [ reduce using rule 56 (empty -> .) ]
-  ! DO              [ reduce using rule 56 (empty -> .) ]
-  ! CONSOLE         [ reduce using rule 56 (empty -> .) ]
-  ! INT             [ reduce using rule 56 (empty -> .) ]
-  ! BOOL            [ reduce using rule 56 (empty -> .) ]
-  ! STRING          [ reduce using rule 56 (empty -> .) ]
-  ! ID              [ reduce using rule 56 (empty -> .) ]
-  ! CONSTANT        [ reduce using rule 56 (empty -> .) ]
+  ! IF              [ reduce using rule 57 (empty -> .) ]
+  ! WHILE           [ reduce using rule 57 (empty -> .) ]
+  ! DO              [ reduce using rule 57 (empty -> .) ]
+  ! CONSOLE         [ reduce using rule 57 (empty -> .) ]
+  ! INT             [ reduce using rule 57 (empty -> .) ]
+  ! BOOL            [ reduce using rule 57 (empty -> .) ]
+  ! STRING          [ reduce using rule 57 (empty -> .) ]
+  ! ID              [ reduce using rule 57 (empty -> .) ]
+  ! CONSTANT        [ reduce using rule 57 (empty -> .) ]
 
     program                        shift and go to state 1
     statement_list                 shift and go to state 2
@@ -219,17 +221,17 @@ state 2
     (5) statement -> . expression_statement
     (6) statement -> . selection_statement
     (7) statement -> . iteration_statement
-    (8) expression_statement -> . declaration_expression SEMI
-    (9) expression_statement -> . empty SEMI
-    (10) expression_statement -> . input_expression SEMI
-    (11) expression_statement -> . output_expression SEMI
+    (8) expression_statement -> . declaration_expression semicolon
+    (9) expression_statement -> . empty semicolon
+    (10) expression_statement -> . input_expression semicolon
+    (11) expression_statement -> . output_expression semicolon
     (14) selection_statement -> . IF conditional_expression block_statement_list
     (15) selection_statement -> . selection_statement ELSE block_statement_list
     (16) iteration_statement -> . WHILE conditional_expression block_statement_list
     (17) iteration_statement -> . DO block_statement_list WHILE conditional_expression
     (12) declaration_expression -> . assignment_expression
     (13) declaration_expression -> . type_specifier declaration_expression
-    (56) empty -> .
+    (57) empty -> .
     (31) input_expression -> . CONSOLE DOT READLINE LPAREN RPAREN
     (32) output_expression -> . CONSOLE DOT WRITELINE conditional_expression
     (20) assignment_expression -> . variable_expression
@@ -245,7 +247,7 @@ state 2
     IF              shift and go to state 11
     WHILE           shift and go to state 12
     DO              shift and go to state 13
-    SEMI            reduce using rule 56 (empty -> .)
+    SEMI            reduce using rule 57 (empty -> .)
     CONSOLE         shift and go to state 16
     INT             shift and go to state 18
     BOOL            shift and go to state 19
@@ -268,7 +270,8 @@ state 2
 state 3
 
     (2) statement_list -> empty .
-    (9) expression_statement -> empty . SEMI
+    (9) expression_statement -> empty . semicolon
+    (56) semicolon -> . SEMI
 
   ! shift/reduce conflict for SEMI resolved as shift
     IF              reduce using rule 2 (statement_list -> empty .)
@@ -282,10 +285,11 @@ state 3
     CONSTANT        reduce using rule 2 (statement_list -> empty .)
     $end            reduce using rule 2 (statement_list -> empty .)
     RBRACE          reduce using rule 2 (statement_list -> empty .)
-    SEMI            shift and go to state 25
+    SEMI            shift and go to state 26
 
   ! SEMI            [ reduce using rule 2 (statement_list -> empty .) ]
 
+    semicolon                      shift and go to state 25
 
 state 4
 
@@ -340,7 +344,7 @@ state 6
     SEMI            reduce using rule 6 (statement -> selection_statement .)
     $end            reduce using rule 6 (statement -> selection_statement .)
     RBRACE          reduce using rule 6 (statement -> selection_statement .)
-    ELSE            shift and go to state 26
+    ELSE            shift and go to state 27
 
 
 state 7
@@ -363,51 +367,57 @@ state 7
 
 state 8
 
-    (8) expression_statement -> declaration_expression . SEMI
+    (8) expression_statement -> declaration_expression . semicolon
+    (56) semicolon -> . SEMI
 
-    SEMI            shift and go to state 27
+    SEMI            shift and go to state 26
 
+    semicolon                      shift and go to state 28
 
 state 9
 
-    (10) expression_statement -> input_expression . SEMI
+    (10) expression_statement -> input_expression . semicolon
+    (56) semicolon -> . SEMI
 
-    SEMI            shift and go to state 28
+    SEMI            shift and go to state 26
 
+    semicolon                      shift and go to state 29
 
 state 10
 
-    (11) expression_statement -> output_expression . SEMI
+    (11) expression_statement -> output_expression . semicolon
+    (56) semicolon -> . SEMI
 
-    SEMI            shift and go to state 29
+    SEMI            shift and go to state 26
 
+    semicolon                      shift and go to state 30
 
 state 11
 
     (14) selection_statement -> IF . conditional_expression block_statement_list
     (19) conditional_expression -> . LPAREN logical_expression RPAREN
 
-    LPAREN          shift and go to state 31
+    LPAREN          shift and go to state 32
 
-    conditional_expression         shift and go to state 30
+    conditional_expression         shift and go to state 31
 
 state 12
 
     (16) iteration_statement -> WHILE . conditional_expression block_statement_list
     (19) conditional_expression -> . LPAREN logical_expression RPAREN
 
-    LPAREN          shift and go to state 31
+    LPAREN          shift and go to state 32
 
-    conditional_expression         shift and go to state 32
+    conditional_expression         shift and go to state 33
 
 state 13
 
     (17) iteration_statement -> DO . block_statement_list WHILE conditional_expression
     (18) block_statement_list -> . LBRACE statement_list RBRACE
 
-    LBRACE          shift and go to state 34
+    LBRACE          shift and go to state 35
 
-    block_statement_list           shift and go to state 33
+    block_statement_list           shift and go to state 34
 
 state 14
 
@@ -416,7 +426,7 @@ state 14
     (22) assignment_expression -> assignment_expression . EQUALS input_expression
 
     SEMI            reduce using rule 12 (declaration_expression -> assignment_expression .)
-    EQUALS          shift and go to state 35
+    EQUALS          shift and go to state 36
 
 
 state 15
@@ -440,7 +450,7 @@ state 15
     CONSTANT        shift and go to state 22
 
     type_specifier                 shift and go to state 15
-    declaration_expression         shift and go to state 36
+    declaration_expression         shift and go to state 37
     assignment_expression          shift and go to state 14
     variable_expression            shift and go to state 17
 
@@ -449,7 +459,7 @@ state 16
     (31) input_expression -> CONSOLE . DOT READLINE LPAREN RPAREN
     (32) output_expression -> CONSOLE . DOT WRITELINE conditional_expression
 
-    DOT             shift and go to state 37
+    DOT             shift and go to state 38
 
 
 state 17
@@ -555,102 +565,122 @@ state 23
 
 state 24
 
-    (9) expression_statement -> empty . SEMI
+    (9) expression_statement -> empty . semicolon
+    (56) semicolon -> . SEMI
 
-    SEMI            shift and go to state 25
+    SEMI            shift and go to state 26
 
+    semicolon                      shift and go to state 25
 
 state 25
 
-    (9) expression_statement -> empty SEMI .
+    (9) expression_statement -> empty semicolon .
 
-    IF              reduce using rule 9 (expression_statement -> empty SEMI .)
-    WHILE           reduce using rule 9 (expression_statement -> empty SEMI .)
-    DO              reduce using rule 9 (expression_statement -> empty SEMI .)
-    CONSOLE         reduce using rule 9 (expression_statement -> empty SEMI .)
-    INT             reduce using rule 9 (expression_statement -> empty SEMI .)
-    BOOL            reduce using rule 9 (expression_statement -> empty SEMI .)
-    STRING          reduce using rule 9 (expression_statement -> empty SEMI .)
-    ID              reduce using rule 9 (expression_statement -> empty SEMI .)
-    CONSTANT        reduce using rule 9 (expression_statement -> empty SEMI .)
-    SEMI            reduce using rule 9 (expression_statement -> empty SEMI .)
-    $end            reduce using rule 9 (expression_statement -> empty SEMI .)
-    RBRACE          reduce using rule 9 (expression_statement -> empty SEMI .)
+    IF              reduce using rule 9 (expression_statement -> empty semicolon .)
+    WHILE           reduce using rule 9 (expression_statement -> empty semicolon .)
+    DO              reduce using rule 9 (expression_statement -> empty semicolon .)
+    CONSOLE         reduce using rule 9 (expression_statement -> empty semicolon .)
+    INT             reduce using rule 9 (expression_statement -> empty semicolon .)
+    BOOL            reduce using rule 9 (expression_statement -> empty semicolon .)
+    STRING          reduce using rule 9 (expression_statement -> empty semicolon .)
+    ID              reduce using rule 9 (expression_statement -> empty semicolon .)
+    CONSTANT        reduce using rule 9 (expression_statement -> empty semicolon .)
+    SEMI            reduce using rule 9 (expression_statement -> empty semicolon .)
+    $end            reduce using rule 9 (expression_statement -> empty semicolon .)
+    RBRACE          reduce using rule 9 (expression_statement -> empty semicolon .)
 
 
 state 26
 
-    (15) selection_statement -> selection_statement ELSE . block_statement_list
-    (18) block_statement_list -> . LBRACE statement_list RBRACE
+    (56) semicolon -> SEMI .
 
-    LBRACE          shift and go to state 34
+    IF              reduce using rule 56 (semicolon -> SEMI .)
+    WHILE           reduce using rule 56 (semicolon -> SEMI .)
+    DO              reduce using rule 56 (semicolon -> SEMI .)
+    CONSOLE         reduce using rule 56 (semicolon -> SEMI .)
+    INT             reduce using rule 56 (semicolon -> SEMI .)
+    BOOL            reduce using rule 56 (semicolon -> SEMI .)
+    STRING          reduce using rule 56 (semicolon -> SEMI .)
+    ID              reduce using rule 56 (semicolon -> SEMI .)
+    CONSTANT        reduce using rule 56 (semicolon -> SEMI .)
+    SEMI            reduce using rule 56 (semicolon -> SEMI .)
+    $end            reduce using rule 56 (semicolon -> SEMI .)
+    RBRACE          reduce using rule 56 (semicolon -> SEMI .)
 
-    block_statement_list           shift and go to state 38
 
 state 27
 
-    (8) expression_statement -> declaration_expression SEMI .
+    (15) selection_statement -> selection_statement ELSE . block_statement_list
+    (18) block_statement_list -> . LBRACE statement_list RBRACE
 
-    IF              reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    WHILE           reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    DO              reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    CONSOLE         reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    INT             reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    BOOL            reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    STRING          reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    ID              reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    CONSTANT        reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    SEMI            reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    $end            reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
-    RBRACE          reduce using rule 8 (expression_statement -> declaration_expression SEMI .)
+    LBRACE          shift and go to state 35
 
+    block_statement_list           shift and go to state 39
 
 state 28
 
-    (10) expression_statement -> input_expression SEMI .
+    (8) expression_statement -> declaration_expression semicolon .
 
-    IF              reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    WHILE           reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    DO              reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    CONSOLE         reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    INT             reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    BOOL            reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    STRING          reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    ID              reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    CONSTANT        reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    SEMI            reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    $end            reduce using rule 10 (expression_statement -> input_expression SEMI .)
-    RBRACE          reduce using rule 10 (expression_statement -> input_expression SEMI .)
+    IF              reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    WHILE           reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    DO              reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    CONSOLE         reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    INT             reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    BOOL            reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    STRING          reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    ID              reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    CONSTANT        reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    SEMI            reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    $end            reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
+    RBRACE          reduce using rule 8 (expression_statement -> declaration_expression semicolon .)
 
 
 state 29
 
-    (11) expression_statement -> output_expression SEMI .
+    (10) expression_statement -> input_expression semicolon .
 
-    IF              reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    WHILE           reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    DO              reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    CONSOLE         reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    INT             reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    BOOL            reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    STRING          reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    ID              reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    CONSTANT        reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    SEMI            reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    $end            reduce using rule 11 (expression_statement -> output_expression SEMI .)
-    RBRACE          reduce using rule 11 (expression_statement -> output_expression SEMI .)
+    IF              reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    WHILE           reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    DO              reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    CONSOLE         reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    INT             reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    BOOL            reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    STRING          reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    ID              reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    CONSTANT        reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    SEMI            reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    $end            reduce using rule 10 (expression_statement -> input_expression semicolon .)
+    RBRACE          reduce using rule 10 (expression_statement -> input_expression semicolon .)
 
 
 state 30
 
+    (11) expression_statement -> output_expression semicolon .
+
+    IF              reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    WHILE           reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    DO              reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    CONSOLE         reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    INT             reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    BOOL            reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    STRING          reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    ID              reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    CONSTANT        reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    SEMI            reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    $end            reduce using rule 11 (expression_statement -> output_expression semicolon .)
+    RBRACE          reduce using rule 11 (expression_statement -> output_expression semicolon .)
+
+
+state 31
+
     (14) selection_statement -> IF conditional_expression . block_statement_list
     (18) block_statement_list -> . LBRACE statement_list RBRACE
 
-    LBRACE          shift and go to state 34
+    LBRACE          shift and go to state 35
 
-    block_statement_list           shift and go to state 39
+    block_statement_list           shift and go to state 40
 
-state 31
+state 32
 
     (19) conditional_expression -> LPAREN . logical_expression RPAREN
     (23) logical_expression -> . equality_expression
@@ -670,51 +700,51 @@ state 31
     (54) boolean_expression -> . TRUE
     (55) boolean_expression -> . FALSE
 
-    DIGIT           shift and go to state 47
-    STRING_SENTENCE shift and go to state 48
+    DIGIT           shift and go to state 48
+    STRING_SENTENCE shift and go to state 49
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
-    TRUE            shift and go to state 49
-    FALSE           shift and go to state 50
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
 
-    logical_expression             shift and go to state 40
-    equality_expression            shift and go to state 41
-    relational_expression          shift and go to state 42
-    math_expression                shift and go to state 43
-    primary_expression             shift and go to state 44
-    variable_expression            shift and go to state 45
-    boolean_expression             shift and go to state 46
+    logical_expression             shift and go to state 41
+    equality_expression            shift and go to state 42
+    relational_expression          shift and go to state 43
+    math_expression                shift and go to state 44
+    primary_expression             shift and go to state 45
+    variable_expression            shift and go to state 46
+    boolean_expression             shift and go to state 47
 
-state 32
+state 33
 
     (16) iteration_statement -> WHILE conditional_expression . block_statement_list
     (18) block_statement_list -> . LBRACE statement_list RBRACE
 
-    LBRACE          shift and go to state 34
+    LBRACE          shift and go to state 35
 
-    block_statement_list           shift and go to state 51
+    block_statement_list           shift and go to state 52
 
-state 33
+state 34
 
     (17) iteration_statement -> DO block_statement_list . WHILE conditional_expression
 
-    WHILE           shift and go to state 52
+    WHILE           shift and go to state 53
 
 
-state 34
+state 35
 
     (18) block_statement_list -> LBRACE . statement_list RBRACE
     (2) statement_list -> . empty
     (3) statement_list -> . statement
     (4) statement_list -> . statement_list statement
-    (56) empty -> .
+    (57) empty -> .
     (5) statement -> . expression_statement
     (6) statement -> . selection_statement
     (7) statement -> . iteration_statement
-    (8) expression_statement -> . declaration_expression SEMI
-    (9) expression_statement -> . empty SEMI
-    (10) expression_statement -> . input_expression SEMI
-    (11) expression_statement -> . output_expression SEMI
+    (8) expression_statement -> . declaration_expression semicolon
+    (9) expression_statement -> . empty semicolon
+    (10) expression_statement -> . input_expression semicolon
+    (11) expression_statement -> . output_expression semicolon
     (14) selection_statement -> . IF conditional_expression block_statement_list
     (15) selection_statement -> . selection_statement ELSE block_statement_list
     (16) iteration_statement -> . WHILE conditional_expression block_statement_list
@@ -741,8 +771,8 @@ state 34
   ! shift/reduce conflict for STRING resolved as shift
   ! shift/reduce conflict for ID resolved as shift
   ! shift/reduce conflict for CONSTANT resolved as shift
-    SEMI            reduce using rule 56 (empty -> .)
-    RBRACE          reduce using rule 56 (empty -> .)
+    SEMI            reduce using rule 57 (empty -> .)
+    RBRACE          reduce using rule 57 (empty -> .)
     IF              shift and go to state 11
     WHILE           shift and go to state 12
     DO              shift and go to state 13
@@ -753,17 +783,17 @@ state 34
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
 
-  ! IF              [ reduce using rule 56 (empty -> .) ]
-  ! WHILE           [ reduce using rule 56 (empty -> .) ]
-  ! DO              [ reduce using rule 56 (empty -> .) ]
-  ! CONSOLE         [ reduce using rule 56 (empty -> .) ]
-  ! INT             [ reduce using rule 56 (empty -> .) ]
-  ! BOOL            [ reduce using rule 56 (empty -> .) ]
-  ! STRING          [ reduce using rule 56 (empty -> .) ]
-  ! ID              [ reduce using rule 56 (empty -> .) ]
-  ! CONSTANT        [ reduce using rule 56 (empty -> .) ]
+  ! IF              [ reduce using rule 57 (empty -> .) ]
+  ! WHILE           [ reduce using rule 57 (empty -> .) ]
+  ! DO              [ reduce using rule 57 (empty -> .) ]
+  ! CONSOLE         [ reduce using rule 57 (empty -> .) ]
+  ! INT             [ reduce using rule 57 (empty -> .) ]
+  ! BOOL            [ reduce using rule 57 (empty -> .) ]
+  ! STRING          [ reduce using rule 57 (empty -> .) ]
+  ! ID              [ reduce using rule 57 (empty -> .) ]
+  ! CONSTANT        [ reduce using rule 57 (empty -> .) ]
 
-    statement_list                 shift and go to state 53
+    statement_list                 shift and go to state 54
     empty                          shift and go to state 3
     statement                      shift and go to state 4
     expression_statement           shift and go to state 5
@@ -776,7 +806,7 @@ state 34
     type_specifier                 shift and go to state 15
     variable_expression            shift and go to state 17
 
-state 35
+state 36
 
     (21) assignment_expression -> assignment_expression EQUALS . logical_expression
     (22) assignment_expression -> assignment_expression EQUALS . input_expression
@@ -798,40 +828,40 @@ state 35
     (54) boolean_expression -> . TRUE
     (55) boolean_expression -> . FALSE
 
-    CONSOLE         shift and go to state 56
-    DIGIT           shift and go to state 47
-    STRING_SENTENCE shift and go to state 48
+    CONSOLE         shift and go to state 57
+    DIGIT           shift and go to state 48
+    STRING_SENTENCE shift and go to state 49
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
-    TRUE            shift and go to state 49
-    FALSE           shift and go to state 50
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
 
-    logical_expression             shift and go to state 54
-    input_expression               shift and go to state 55
-    equality_expression            shift and go to state 41
-    relational_expression          shift and go to state 42
-    math_expression                shift and go to state 43
-    primary_expression             shift and go to state 44
-    variable_expression            shift and go to state 45
-    boolean_expression             shift and go to state 46
+    logical_expression             shift and go to state 55
+    input_expression               shift and go to state 56
+    equality_expression            shift and go to state 42
+    relational_expression          shift and go to state 43
+    math_expression                shift and go to state 44
+    primary_expression             shift and go to state 45
+    variable_expression            shift and go to state 46
+    boolean_expression             shift and go to state 47
 
-state 36
+state 37
 
     (13) declaration_expression -> type_specifier declaration_expression .
 
     SEMI            reduce using rule 13 (declaration_expression -> type_specifier declaration_expression .)
 
 
-state 37
+state 38
 
     (31) input_expression -> CONSOLE DOT . READLINE LPAREN RPAREN
     (32) output_expression -> CONSOLE DOT . WRITELINE conditional_expression
 
-    READLINE        shift and go to state 57
-    WRITELINE       shift and go to state 58
+    READLINE        shift and go to state 58
+    WRITELINE       shift and go to state 59
 
 
-state 38
+state 39
 
     (15) selection_statement -> selection_statement ELSE block_statement_list .
 
@@ -850,7 +880,7 @@ state 38
     RBRACE          reduce using rule 15 (selection_statement -> selection_statement ELSE block_statement_list .)
 
 
-state 39
+state 40
 
     (14) selection_statement -> IF conditional_expression block_statement_list .
 
@@ -869,20 +899,20 @@ state 39
     RBRACE          reduce using rule 14 (selection_statement -> IF conditional_expression block_statement_list .)
 
 
-state 40
+state 41
 
     (19) conditional_expression -> LPAREN logical_expression . RPAREN
     (24) logical_expression -> logical_expression . logical_operators equality_expression
     (36) logical_operators -> . LAND
     (37) logical_operators -> . LOR
 
-    RPAREN          shift and go to state 59
-    LAND            shift and go to state 61
-    LOR             shift and go to state 62
+    RPAREN          shift and go to state 60
+    LAND            shift and go to state 62
+    LOR             shift and go to state 63
 
-    logical_operators              shift and go to state 60
+    logical_operators              shift and go to state 61
 
-state 41
+state 42
 
     (23) logical_expression -> equality_expression .
     (26) equality_expression -> equality_expression . equality_operators relational_expression
@@ -894,12 +924,12 @@ state 41
     LOR             reduce using rule 23 (logical_expression -> equality_expression .)
     EQUALS          reduce using rule 23 (logical_expression -> equality_expression .)
     SEMI            reduce using rule 23 (logical_expression -> equality_expression .)
-    EQ              shift and go to state 64
-    NE              shift and go to state 65
+    EQ              shift and go to state 65
+    NE              shift and go to state 66
 
-    equality_operators             shift and go to state 63
+    equality_operators             shift and go to state 64
 
-state 42
+state 43
 
     (25) equality_expression -> relational_expression .
     (28) relational_expression -> relational_expression . relational_operators math_expression
@@ -915,14 +945,14 @@ state 42
     LOR             reduce using rule 25 (equality_expression -> relational_expression .)
     EQUALS          reduce using rule 25 (equality_expression -> relational_expression .)
     SEMI            reduce using rule 25 (equality_expression -> relational_expression .)
-    LT              shift and go to state 67
-    GT              shift and go to state 68
-    LE              shift and go to state 69
-    GE              shift and go to state 70
+    LT              shift and go to state 68
+    GT              shift and go to state 69
+    LE              shift and go to state 70
+    GE              shift and go to state 71
 
-    relational_operators           shift and go to state 66
+    relational_operators           shift and go to state 67
 
-state 43
+state 44
 
     (27) relational_expression -> math_expression .
     (30) math_expression -> math_expression . math_operators primary_expression
@@ -942,14 +972,14 @@ state 43
     LOR             reduce using rule 27 (relational_expression -> math_expression .)
     EQUALS          reduce using rule 27 (relational_expression -> math_expression .)
     SEMI            reduce using rule 27 (relational_expression -> math_expression .)
-    PLUS            shift and go to state 72
-    MINUS           shift and go to state 73
-    TIMES           shift and go to state 74
-    DIVIDE          shift and go to state 75
+    PLUS            shift and go to state 73
+    MINUS           shift and go to state 74
+    TIMES           shift and go to state 75
+    DIVIDE          shift and go to state 76
 
-    math_operators                 shift and go to state 71
+    math_operators                 shift and go to state 72
 
-state 44
+state 45
 
     (29) math_expression -> primary_expression .
 
@@ -970,7 +1000,7 @@ state 44
     SEMI            reduce using rule 29 (math_expression -> primary_expression .)
 
 
-state 45
+state 46
 
     (48) primary_expression -> variable_expression .
 
@@ -991,7 +1021,7 @@ state 45
     SEMI            reduce using rule 48 (primary_expression -> variable_expression .)
 
 
-state 46
+state 47
 
     (49) primary_expression -> boolean_expression .
 
@@ -1012,7 +1042,7 @@ state 46
     SEMI            reduce using rule 49 (primary_expression -> boolean_expression .)
 
 
-state 47
+state 48
 
     (50) primary_expression -> DIGIT .
 
@@ -1033,7 +1063,7 @@ state 47
     SEMI            reduce using rule 50 (primary_expression -> DIGIT .)
 
 
-state 48
+state 49
 
     (51) primary_expression -> STRING_SENTENCE .
 
@@ -1054,7 +1084,7 @@ state 48
     SEMI            reduce using rule 51 (primary_expression -> STRING_SENTENCE .)
 
 
-state 49
+state 50
 
     (54) boolean_expression -> TRUE .
 
@@ -1075,7 +1105,7 @@ state 49
     SEMI            reduce using rule 54 (boolean_expression -> TRUE .)
 
 
-state 50
+state 51
 
     (55) boolean_expression -> FALSE .
 
@@ -1096,7 +1126,7 @@ state 50
     SEMI            reduce using rule 55 (boolean_expression -> FALSE .)
 
 
-state 51
+state 52
 
     (16) iteration_statement -> WHILE conditional_expression block_statement_list .
 
@@ -1114,33 +1144,33 @@ state 51
     RBRACE          reduce using rule 16 (iteration_statement -> WHILE conditional_expression block_statement_list .)
 
 
-state 52
+state 53
 
     (17) iteration_statement -> DO block_statement_list WHILE . conditional_expression
     (19) conditional_expression -> . LPAREN logical_expression RPAREN
 
-    LPAREN          shift and go to state 31
+    LPAREN          shift and go to state 32
 
-    conditional_expression         shift and go to state 76
+    conditional_expression         shift and go to state 77
 
-state 53
+state 54
 
     (18) block_statement_list -> LBRACE statement_list . RBRACE
     (4) statement_list -> statement_list . statement
     (5) statement -> . expression_statement
     (6) statement -> . selection_statement
     (7) statement -> . iteration_statement
-    (8) expression_statement -> . declaration_expression SEMI
-    (9) expression_statement -> . empty SEMI
-    (10) expression_statement -> . input_expression SEMI
-    (11) expression_statement -> . output_expression SEMI
+    (8) expression_statement -> . declaration_expression semicolon
+    (9) expression_statement -> . empty semicolon
+    (10) expression_statement -> . input_expression semicolon
+    (11) expression_statement -> . output_expression semicolon
     (14) selection_statement -> . IF conditional_expression block_statement_list
     (15) selection_statement -> . selection_statement ELSE block_statement_list
     (16) iteration_statement -> . WHILE conditional_expression block_statement_list
     (17) iteration_statement -> . DO block_statement_list WHILE conditional_expression
     (12) declaration_expression -> . assignment_expression
     (13) declaration_expression -> . type_specifier declaration_expression
-    (56) empty -> .
+    (57) empty -> .
     (31) input_expression -> . CONSOLE DOT READLINE LPAREN RPAREN
     (32) output_expression -> . CONSOLE DOT WRITELINE conditional_expression
     (20) assignment_expression -> . variable_expression
@@ -1152,11 +1182,11 @@ state 53
     (52) variable_expression -> . ID
     (53) variable_expression -> . CONSTANT
 
-    RBRACE          shift and go to state 77
+    RBRACE          shift and go to state 78
     IF              shift and go to state 11
     WHILE           shift and go to state 12
     DO              shift and go to state 13
-    SEMI            reduce using rule 56 (empty -> .)
+    SEMI            reduce using rule 57 (empty -> .)
     CONSOLE         shift and go to state 16
     INT             shift and go to state 18
     BOOL            shift and go to state 19
@@ -1176,7 +1206,7 @@ state 53
     type_specifier                 shift and go to state 15
     variable_expression            shift and go to state 17
 
-state 54
+state 55
 
     (21) assignment_expression -> assignment_expression EQUALS logical_expression .
     (24) logical_expression -> logical_expression . logical_operators equality_expression
@@ -1185,12 +1215,12 @@ state 54
 
     EQUALS          reduce using rule 21 (assignment_expression -> assignment_expression EQUALS logical_expression .)
     SEMI            reduce using rule 21 (assignment_expression -> assignment_expression EQUALS logical_expression .)
-    LAND            shift and go to state 61
-    LOR             shift and go to state 62
+    LAND            shift and go to state 62
+    LOR             shift and go to state 63
 
-    logical_operators              shift and go to state 60
+    logical_operators              shift and go to state 61
 
-state 55
+state 56
 
     (22) assignment_expression -> assignment_expression EQUALS input_expression .
 
@@ -1198,30 +1228,30 @@ state 55
     SEMI            reduce using rule 22 (assignment_expression -> assignment_expression EQUALS input_expression .)
 
 
-state 56
+state 57
 
     (31) input_expression -> CONSOLE . DOT READLINE LPAREN RPAREN
 
-    DOT             shift and go to state 78
-
-
-state 57
-
-    (31) input_expression -> CONSOLE DOT READLINE . LPAREN RPAREN
-
-    LPAREN          shift and go to state 79
+    DOT             shift and go to state 79
 
 
 state 58
 
+    (31) input_expression -> CONSOLE DOT READLINE . LPAREN RPAREN
+
+    LPAREN          shift and go to state 80
+
+
+state 59
+
     (32) output_expression -> CONSOLE DOT WRITELINE . conditional_expression
     (19) conditional_expression -> . LPAREN logical_expression RPAREN
 
-    LPAREN          shift and go to state 31
+    LPAREN          shift and go to state 32
 
-    conditional_expression         shift and go to state 80
+    conditional_expression         shift and go to state 81
 
-state 59
+state 60
 
     (19) conditional_expression -> LPAREN logical_expression RPAREN .
 
@@ -1240,7 +1270,7 @@ state 59
     RBRACE          reduce using rule 19 (conditional_expression -> LPAREN logical_expression RPAREN .)
 
 
-state 60
+state 61
 
     (24) logical_expression -> logical_expression logical_operators . equality_expression
     (25) equality_expression -> . relational_expression
@@ -1258,21 +1288,21 @@ state 60
     (54) boolean_expression -> . TRUE
     (55) boolean_expression -> . FALSE
 
-    DIGIT           shift and go to state 47
-    STRING_SENTENCE shift and go to state 48
+    DIGIT           shift and go to state 48
+    STRING_SENTENCE shift and go to state 49
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
-    TRUE            shift and go to state 49
-    FALSE           shift and go to state 50
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
 
-    equality_expression            shift and go to state 81
-    relational_expression          shift and go to state 42
-    math_expression                shift and go to state 43
-    primary_expression             shift and go to state 44
-    variable_expression            shift and go to state 45
-    boolean_expression             shift and go to state 46
+    equality_expression            shift and go to state 82
+    relational_expression          shift and go to state 43
+    math_expression                shift and go to state 44
+    primary_expression             shift and go to state 45
+    variable_expression            shift and go to state 46
+    boolean_expression             shift and go to state 47
 
-state 61
+state 62
 
     (36) logical_operators -> LAND .
 
@@ -1284,7 +1314,7 @@ state 61
     FALSE           reduce using rule 36 (logical_operators -> LAND .)
 
 
-state 62
+state 63
 
     (37) logical_operators -> LOR .
 
@@ -1296,7 +1326,7 @@ state 62
     FALSE           reduce using rule 37 (logical_operators -> LOR .)
 
 
-state 63
+state 64
 
     (26) equality_expression -> equality_expression equality_operators . relational_expression
     (27) relational_expression -> . math_expression
@@ -1312,20 +1342,20 @@ state 63
     (54) boolean_expression -> . TRUE
     (55) boolean_expression -> . FALSE
 
-    DIGIT           shift and go to state 47
-    STRING_SENTENCE shift and go to state 48
+    DIGIT           shift and go to state 48
+    STRING_SENTENCE shift and go to state 49
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
-    TRUE            shift and go to state 49
-    FALSE           shift and go to state 50
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
 
-    relational_expression          shift and go to state 82
-    math_expression                shift and go to state 43
-    primary_expression             shift and go to state 44
-    variable_expression            shift and go to state 45
-    boolean_expression             shift and go to state 46
+    relational_expression          shift and go to state 83
+    math_expression                shift and go to state 44
+    primary_expression             shift and go to state 45
+    variable_expression            shift and go to state 46
+    boolean_expression             shift and go to state 47
 
-state 64
+state 65
 
     (38) equality_operators -> EQ .
 
@@ -1337,7 +1367,7 @@ state 64
     FALSE           reduce using rule 38 (equality_operators -> EQ .)
 
 
-state 65
+state 66
 
     (39) equality_operators -> NE .
 
@@ -1349,7 +1379,7 @@ state 65
     FALSE           reduce using rule 39 (equality_operators -> NE .)
 
 
-state 66
+state 67
 
     (28) relational_expression -> relational_expression relational_operators . math_expression
     (29) math_expression -> . primary_expression
@@ -1363,19 +1393,19 @@ state 66
     (54) boolean_expression -> . TRUE
     (55) boolean_expression -> . FALSE
 
-    DIGIT           shift and go to state 47
-    STRING_SENTENCE shift and go to state 48
+    DIGIT           shift and go to state 48
+    STRING_SENTENCE shift and go to state 49
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
-    TRUE            shift and go to state 49
-    FALSE           shift and go to state 50
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
 
-    math_expression                shift and go to state 83
-    primary_expression             shift and go to state 44
-    variable_expression            shift and go to state 45
-    boolean_expression             shift and go to state 46
+    math_expression                shift and go to state 84
+    primary_expression             shift and go to state 45
+    variable_expression            shift and go to state 46
+    boolean_expression             shift and go to state 47
 
-state 67
+state 68
 
     (40) relational_operators -> LT .
 
@@ -1387,7 +1417,7 @@ state 67
     FALSE           reduce using rule 40 (relational_operators -> LT .)
 
 
-state 68
+state 69
 
     (41) relational_operators -> GT .
 
@@ -1399,7 +1429,7 @@ state 68
     FALSE           reduce using rule 41 (relational_operators -> GT .)
 
 
-state 69
+state 70
 
     (42) relational_operators -> LE .
 
@@ -1411,7 +1441,7 @@ state 69
     FALSE           reduce using rule 42 (relational_operators -> LE .)
 
 
-state 70
+state 71
 
     (43) relational_operators -> GE .
 
@@ -1423,7 +1453,7 @@ state 70
     FALSE           reduce using rule 43 (relational_operators -> GE .)
 
 
-state 71
+state 72
 
     (30) math_expression -> math_expression math_operators . primary_expression
     (48) primary_expression -> . variable_expression
@@ -1435,18 +1465,18 @@ state 71
     (54) boolean_expression -> . TRUE
     (55) boolean_expression -> . FALSE
 
-    DIGIT           shift and go to state 47
-    STRING_SENTENCE shift and go to state 48
+    DIGIT           shift and go to state 48
+    STRING_SENTENCE shift and go to state 49
     ID              shift and go to state 21
     CONSTANT        shift and go to state 22
-    TRUE            shift and go to state 49
-    FALSE           shift and go to state 50
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
 
-    primary_expression             shift and go to state 84
-    variable_expression            shift and go to state 45
-    boolean_expression             shift and go to state 46
+    primary_expression             shift and go to state 85
+    variable_expression            shift and go to state 46
+    boolean_expression             shift and go to state 47
 
-state 72
+state 73
 
     (44) math_operators -> PLUS .
 
@@ -1458,7 +1488,7 @@ state 72
     FALSE           reduce using rule 44 (math_operators -> PLUS .)
 
 
-state 73
+state 74
 
     (45) math_operators -> MINUS .
 
@@ -1470,7 +1500,7 @@ state 73
     FALSE           reduce using rule 45 (math_operators -> MINUS .)
 
 
-state 74
+state 75
 
     (46) math_operators -> TIMES .
 
@@ -1482,7 +1512,7 @@ state 74
     FALSE           reduce using rule 46 (math_operators -> TIMES .)
 
 
-state 75
+state 76
 
     (47) math_operators -> DIVIDE .
 
@@ -1494,7 +1524,7 @@ state 75
     FALSE           reduce using rule 47 (math_operators -> DIVIDE .)
 
 
-state 76
+state 77
 
     (17) iteration_statement -> DO block_statement_list WHILE conditional_expression .
 
@@ -1512,7 +1542,7 @@ state 76
     RBRACE          reduce using rule 17 (iteration_statement -> DO block_statement_list WHILE conditional_expression .)
 
 
-state 77
+state 78
 
     (18) block_statement_list -> LBRACE statement_list RBRACE .
 
@@ -1531,28 +1561,28 @@ state 77
     RBRACE          reduce using rule 18 (block_statement_list -> LBRACE statement_list RBRACE .)
 
 
-state 78
+state 79
 
     (31) input_expression -> CONSOLE DOT . READLINE LPAREN RPAREN
 
-    READLINE        shift and go to state 57
-
-
-state 79
-
-    (31) input_expression -> CONSOLE DOT READLINE LPAREN . RPAREN
-
-    RPAREN          shift and go to state 85
+    READLINE        shift and go to state 58
 
 
 state 80
+
+    (31) input_expression -> CONSOLE DOT READLINE LPAREN . RPAREN
+
+    RPAREN          shift and go to state 86
+
+
+state 81
 
     (32) output_expression -> CONSOLE DOT WRITELINE conditional_expression .
 
     SEMI            reduce using rule 32 (output_expression -> CONSOLE DOT WRITELINE conditional_expression .)
 
 
-state 81
+state 82
 
     (24) logical_expression -> logical_expression logical_operators equality_expression .
     (26) equality_expression -> equality_expression . equality_operators relational_expression
@@ -1564,12 +1594,12 @@ state 81
     LOR             reduce using rule 24 (logical_expression -> logical_expression logical_operators equality_expression .)
     EQUALS          reduce using rule 24 (logical_expression -> logical_expression logical_operators equality_expression .)
     SEMI            reduce using rule 24 (logical_expression -> logical_expression logical_operators equality_expression .)
-    EQ              shift and go to state 64
-    NE              shift and go to state 65
+    EQ              shift and go to state 65
+    NE              shift and go to state 66
 
-    equality_operators             shift and go to state 63
+    equality_operators             shift and go to state 64
 
-state 82
+state 83
 
     (26) equality_expression -> equality_expression equality_operators relational_expression .
     (28) relational_expression -> relational_expression . relational_operators math_expression
@@ -1585,14 +1615,14 @@ state 82
     LOR             reduce using rule 26 (equality_expression -> equality_expression equality_operators relational_expression .)
     EQUALS          reduce using rule 26 (equality_expression -> equality_expression equality_operators relational_expression .)
     SEMI            reduce using rule 26 (equality_expression -> equality_expression equality_operators relational_expression .)
-    LT              shift and go to state 67
-    GT              shift and go to state 68
-    LE              shift and go to state 69
-    GE              shift and go to state 70
+    LT              shift and go to state 68
+    GT              shift and go to state 69
+    LE              shift and go to state 70
+    GE              shift and go to state 71
 
-    relational_operators           shift and go to state 66
+    relational_operators           shift and go to state 67
 
-state 83
+state 84
 
     (28) relational_expression -> relational_expression relational_operators math_expression .
     (30) math_expression -> math_expression . math_operators primary_expression
@@ -1612,14 +1642,14 @@ state 83
     LOR             reduce using rule 28 (relational_expression -> relational_expression relational_operators math_expression .)
     EQUALS          reduce using rule 28 (relational_expression -> relational_expression relational_operators math_expression .)
     SEMI            reduce using rule 28 (relational_expression -> relational_expression relational_operators math_expression .)
-    PLUS            shift and go to state 72
-    MINUS           shift and go to state 73
-    TIMES           shift and go to state 74
-    DIVIDE          shift and go to state 75
+    PLUS            shift and go to state 73
+    MINUS           shift and go to state 74
+    TIMES           shift and go to state 75
+    DIVIDE          shift and go to state 76
 
-    math_operators                 shift and go to state 71
+    math_operators                 shift and go to state 72
 
-state 84
+state 85
 
     (30) math_expression -> math_expression math_operators primary_expression .
 
@@ -1640,7 +1670,7 @@ state 84
     SEMI            reduce using rule 30 (math_expression -> math_expression math_operators primary_expression .)
 
 
-state 85
+state 86
 
     (31) input_expression -> CONSOLE DOT READLINE LPAREN RPAREN .
 
@@ -1660,12 +1690,12 @@ WARNING: shift/reduce conflict for STRING in state 0 resolved as shift
 WARNING: shift/reduce conflict for ID in state 0 resolved as shift
 WARNING: shift/reduce conflict for CONSTANT in state 0 resolved as shift
 WARNING: shift/reduce conflict for SEMI in state 3 resolved as shift
-WARNING: shift/reduce conflict for IF in state 34 resolved as shift
-WARNING: shift/reduce conflict for WHILE in state 34 resolved as shift
-WARNING: shift/reduce conflict for DO in state 34 resolved as shift
-WARNING: shift/reduce conflict for CONSOLE in state 34 resolved as shift
-WARNING: shift/reduce conflict for INT in state 34 resolved as shift
-WARNING: shift/reduce conflict for BOOL in state 34 resolved as shift
-WARNING: shift/reduce conflict for STRING in state 34 resolved as shift
-WARNING: shift/reduce conflict for ID in state 34 resolved as shift
-WARNING: shift/reduce conflict for CONSTANT in state 34 resolved as shift
+WARNING: shift/reduce conflict for IF in state 35 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 35 resolved as shift
+WARNING: shift/reduce conflict for DO in state 35 resolved as shift
+WARNING: shift/reduce conflict for CONSOLE in state 35 resolved as shift
+WARNING: shift/reduce conflict for INT in state 35 resolved as shift
+WARNING: shift/reduce conflict for BOOL in state 35 resolved as shift
+WARNING: shift/reduce conflict for STRING in state 35 resolved as shift
+WARNING: shift/reduce conflict for ID in state 35 resolved as shift
+WARNING: shift/reduce conflict for CONSTANT in state 35 resolved as shift
