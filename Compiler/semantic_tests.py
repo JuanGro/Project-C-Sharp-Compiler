@@ -11,9 +11,11 @@ bool flag;
 '''
 test3 = '''
 int number2 = 6;
+console.writeline(number2);
 '''
 test4 = '''
 bool FLAG = true;
+console.writeline(FLAG);
 '''
 test5 = '''
 console.writeline("Hi");
@@ -22,6 +24,10 @@ test6 = '''
 int number3 = 7;
 bool flag2 = false;
 string name1 = "Juan";
+
+console.writeline(number3);
+console.writeline(flag2);
+console.writeline(name1);
 '''
 test7 = '''
 int number1 = 0;
@@ -38,7 +44,9 @@ while(number1 <= 50) {
     else {
         flag = false;
     }
+    console.writeline(number1);
 }
+console.writeline(flag);
 '''
 test8 = '''
 console.readline();
@@ -52,7 +60,8 @@ name2 = "Carlos";
 if(number1 == 35) {
     // flag = true;
     number1 = "hi";
-} else {
+}
+else {
     flag = false;
 }
 
@@ -80,7 +89,7 @@ console.writeline(int number_Aux2);
 test12 = '''
 int number3 = 0;
 
-while true {
+while false {
     number3 = number3 + 1;
 }
 '''

@@ -11,3 +11,5 @@ while number1 <= 50   :
     else:  
         flag = False 
      
+    print number1  
+print flag  

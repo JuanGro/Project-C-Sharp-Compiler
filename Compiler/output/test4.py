@@ -1,1 +1,2 @@
 FLAG = True 
+print FLAG  

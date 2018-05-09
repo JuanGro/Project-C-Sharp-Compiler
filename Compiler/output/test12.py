@@ -1,3 +1,3 @@
 number3 = 0 
-while True  :
+while number3 < 10   :
     number3 = number3 + 1 

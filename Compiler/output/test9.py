@@ -4,7 +4,7 @@ name2 = "Carlos"
 if number1 == 35   :
     # flag = True 
     number1 = "hi" 
-  else:  
+else:  
     flag = False 
 '''   while number1 <= 50   :
     number1 = number1 + 1 
