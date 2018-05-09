@@ -57,9 +57,10 @@ def generateCode(test, filename):
 def solveConflicts(f, filename):
     newCode = ""
     for line in f:
-        if 'if' in line or 'while' in line:
-            line = line.replace('\n', '')
-            line += ':\n'
-        newCode += line
+        if len(line.split(" ")) > 2:
+            if 'if' in line or 'while' in line:
+                line = line.replace('\n', '')
+                line += ':\n'
+            newCode += line
     f = open(filename, 'w')
     f.write(newCode)

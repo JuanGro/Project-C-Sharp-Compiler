@@ -22,7 +22,7 @@ test5 = '''
 int a = "hello";
 '''
 test6 = '''
-int result = 0;
+int result;
 int num1 = 9;
 int num2 = 10;
 
