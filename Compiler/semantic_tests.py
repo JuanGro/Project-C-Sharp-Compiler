@@ -8,6 +8,7 @@ test2 = '''
 /*
 bool flag;
 */
+@
 '''
 test3 = '''
 int number2 = 6;
@@ -21,7 +22,7 @@ test5 = '''
 console.writeline("Hi");
 '''
 test6 = '''
-int number3 = 7;
+number3 = 7;
 bool flag2 = false;
 string name1 = "Juan";
 
@@ -49,7 +50,7 @@ while(number1 <= 50) {
 console.writeline(flag);
 '''
 test8 = '''
-console.readline();
+int number = "Hola";
 console.writeline("Hello World!");
 '''
 test9 = '''
