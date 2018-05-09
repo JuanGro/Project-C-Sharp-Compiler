@@ -2,38 +2,94 @@ from semantic import *
 
 # Test it out
 test1 = '''
-console.writeline("Hi");
-int a = 2;
-string b = "";
+// int number1 = 5;
 '''
 test2 = '''
-int number3 = 7;
-bool flag2 = false;
-string name1 = "Juan";
+/*
+bool flag;
+*/
 '''
 test3 = '''
 int number2 = 6;
 '''
 test4 = '''
 bool FLAG = true;
-bool FLAG = false;
 '''
 test5 = '''
-int a = "hello";
+console.writeline("Hi");
 '''
 test6 = '''
-int result;
-int num1 = 9;
-int num2 = 10;
+int number3 = 7;
+bool flag2 = false;
+string name1 = "Juan";
+'''
+test7 = '''
+int number1 = 0;
+bool flag = false;
 
-if (num1 > num2) {
-    result = num1;
-    num1 = 10;
+while(number1 <= 50) {
+    number1 = number1 + 1;
+    if(number1 == 35) {
+        flag = true;
+        if (number1 == 35) {
+            flag = true;
+        }
+    }
+    else {
+        flag = false;
+    }
 }
-else {
-    result = num2;
+'''
+test8 = '''
+console.readline();
+console.writeline("Hello World!");
+'''
+test9 = '''
+bool flag = false;
+int number1 = 3 + 4 * 5;
+name2 = "Carlos";
+
+if(number1 == 35) {
+    // flag = true;
+    number1 = "hi";
+} else {
+    flag = false;
 }
-console.writeline(result);
+
+/*
+while(number1 <= 50) {
+    number1 = number1 + 1;
+}
+*/
+
+string sentence_aux = "Result";
+console.writeline(sentence_aux);
+console.writeline(number1);
+'''
+test10 = '''
+flag = false;
+bool flag;
+int a;
+;
+'''
+test11 = '''
+"Hello World" = 2;
+console.writeline(int number1);
+console.writeline(int number_Aux2);
+'''
+test12 = '''
+int number3 = 0;
+
+while true {
+    number3 = number3 + 1;
+}
+'''
+test13 = '''
+0 = number2;
+
+if (CONSTANT > 2) {
+    console.writeline("YES");
+}
 '''
 
 # Check tests
@@ -66,3 +122,38 @@ print("\nTest 6:")
 t = yacc.parse(test6)
 getSymbolTable(x)
 generateCode(test6, 'test6')
+
+print("\nTest 7:")
+t = yacc.parse(test7)
+getSymbolTable(x)
+generateCode(test7, 'test7')
+
+print("\nTest 8:")
+t = yacc.parse(test8)
+getSymbolTable(x)
+generateCode(test8, 'test8')
+
+print("\nTest 9:")
+t = yacc.parse(test9)
+getSymbolTable(x)
+generateCode(test9, 'test9')
+
+print("\nTest 10:")
+t = yacc.parse(test10)
+getSymbolTable(x)
+generateCode(test10, 'test10')
+
+print("\nTest 11:")
+t = yacc.parse(test11)
+getSymbolTable(x)
+generateCode(test11, 'test11')
+
+print("\nTest 12:")
+t = yacc.parse(test12)
+getSymbolTable(x)
+generateCode(test12, 'test12')
+
+print("\nTest 13:")
+t = yacc.parse(test13)
+getSymbolTable(x)
+generateCode(test13, 'test13')

@@ -1,1 +1,1 @@
-a = "hello" 
+print "Hi"  

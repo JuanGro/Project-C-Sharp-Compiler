@@ -1,3 +1,1 @@
-print "Hi"  
-a = 2 
-b = "" 
+# number1 = 5 

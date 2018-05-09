@@ -5,13 +5,16 @@ tokensDictionary = {
     'int' : '',
     'bool' : '',
     'string' : '',
-    'console' : 'print',
-    'writeline' : '',
+    'console' : '',
+    'writeline' : 'print',
     'readline' : '',
     'true' : 'True',
     'false' : 'False',
     '||' : 'or',
-    '&&' : 'and'
+    '&&' : 'and',
+    '//' : '#',
+    '/*' : '\'\'\'  ',
+    '*/' : '\'\'\'  '
 }
 
 symbolsDictionary = {
@@ -20,7 +23,7 @@ symbolsDictionary = {
     '{' : ' ',
     '}' : ' ',
     ';' : ' ',
-    '.' : ' ',
+    '.' : ' '
 }
 
 def generateCode(test, filename):
@@ -36,8 +39,8 @@ def generateCode(test, filename):
     # print("e:",testAux.replace('\n', '\n ').split(' '))
     for element in testAux.replace('\n', '\n ').split(' '):
         if element.replace('\n', '') in tokensDictionary:
-            if tokensDictionary[element] != '':
-                code += tokensDictionary[element] + " "
+            if tokensDictionary[element.replace('\n', '')] != '':
+                code += tokensDictionary[element.replace('\n', '')] + " "
             else:
                 code += tokensDictionary[element]
         elif element == '\n' or element == '\t':
