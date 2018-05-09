@@ -55,7 +55,7 @@ console.writeline("Hello World!");
 test9 = '''
 bool flag = false;
 int number1 = 3 + 4 * 5;
-name2 = "Carlos";
+string name2 = 4;
 
 if(number1 == 35) {
     // flag = true;

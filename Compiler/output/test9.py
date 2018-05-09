@@ -1,6 +1,6 @@
 flag = False 
 number1 = 3 + 4 * 5 
-name2 = "Carlos" 
+name2 = 4 
 if number1 == 35   :
     # flag = True 
     number1 = "hi" 

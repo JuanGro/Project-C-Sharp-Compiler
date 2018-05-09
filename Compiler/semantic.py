@@ -17,7 +17,25 @@ def getSymbolTable(x):
                     dictionary['value'] = '""'
                 symbolTable.append(dictionary)
             elif element == 'true' or element == 'false' or str(element).isnumeric() == True or '"' in element:
-                dictionary['value'] = element
+                if 'type' in dictionary.keys():
+                    if element == 'true' or element == 'false':
+                        if dictionary['type'] == 'bool':
+                            dictionary['value'] = element
+                        else:
+                            print("ERROR WHEN ASSIGN VALUE")
+                            return 'Error'
+                    elif str(element).isnumeric() == True:
+                        if dictionary['type'] == 'int':
+                            dictionary['value'] = element
+                        else:
+                            print("ERROR WHEN ASSIGN VALUE")
+                            return 'Error'
+                    elif '"' in element:
+                        if dictionary['type'] == 'string':
+                            dictionary['value'] = element
+                        else:
+                            print("ERROR WHEN ASSIGN VALUE")
+                            return 'Error'
             elif element == ';':
                 dictionary = {}
             else:
